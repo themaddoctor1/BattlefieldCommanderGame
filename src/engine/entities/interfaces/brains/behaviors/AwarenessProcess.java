@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * An AwarenessProcess is a class used by a UnitBrain to determine who is
+ * able to be seen. It uses the Decorator Pattern to allow for combinations
+ * of AwarenessProcesses to be used in conjunction.
  */
 
 package engine.entities.interfaces.brains.behaviors;

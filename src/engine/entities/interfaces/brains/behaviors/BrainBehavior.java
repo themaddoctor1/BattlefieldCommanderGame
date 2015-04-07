@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A BrainBehavior is a class that processes aspects of a UnitBrain's function.
+ * This class makes partial use of the Observer pattern. By the way, it is meant
+ * to observe a UnitBrain of the provided name.
  */
 package engine.entities.interfaces.brains.behaviors;
 
@@ -28,10 +28,12 @@ public abstract class BrainBehavior {
     }
     
     public final void setOwner(UnitBrain u){
-        owner = u.getName();
+        setOwner(u.getName());
+        
     }
     
-    public final void setOwner(String nm){ owner = nm;}
+    public void setOwner(String nm){ owner = nm;}
     
     public final UnitBrain getOwner(){ return LevelManager.getLevel().getUnit(owner).getBrain();}
+    public String getOwnerName(){ return owner;}
 }

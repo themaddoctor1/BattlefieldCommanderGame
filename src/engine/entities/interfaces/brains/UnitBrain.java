@@ -1,6 +1,8 @@
 /*
  * The UnitBrain interface is a template for creating classes that give Units a "brain"
- * that allows them to act and follow orders.
+ * that allows them to act and follow orders. Each one has processes that can be utilized
+ * to allow for various means of acting. They don't have to be used, but it is highly
+ * recommended that they be used.
  */
 package engine.entities.interfaces.brains;
 

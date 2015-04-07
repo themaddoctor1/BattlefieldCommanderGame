@@ -1,5 +1,5 @@
 /*
- * A class that builds loadouts and items.
+ * A class that builds loadouts and Items.
  */
 package engine.entities.items;
 

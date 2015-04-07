@@ -1,11 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This Spawner spawns Drop Pods over the map.
  */
 package engine.game;
 
-import engine.entities.units.Infantry;
+import engine.entities.units.soldiers.*;
 import engine.entities.units.testUnits.Drop_Pod;
 import engine.physics.Coordinate;
 import engine.world.LevelManager;

@@ -1,5 +1,5 @@
 /*
- * The Spawner class is an abstract class upon which spawners for different types
+ * The Spawner class is an abstract class upon which Spawners for different types
  * of factions can be created.
  */
 package engine.game;

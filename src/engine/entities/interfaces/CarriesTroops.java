@@ -1,7 +1,8 @@
 /*
  * This interface is used by the GroundVehicle and AirUnit classes, as well as any
- * subclasses they may have. The purpose of this class is to assist with the
- * simulation of transportation capabilities for vehicles and aircraft.
+ * subclasses they may have, or any other classes that want to store Units.
+ * The purpose of this class is to assist with the simulation of transportation
+ * capabilities for vehicles and aircraft.
  */
 package engine.entities.interfaces;
 

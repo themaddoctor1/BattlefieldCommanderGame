@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A Projectile object is an Entity that harms Units. It has a velocity, mass, and
+ * therefore a momentum, which can be used to calculate damage. It also has the ability
+ * to exert splash damage (or explode, if you prefer that explanation).
  */
 
 package engine.entities;

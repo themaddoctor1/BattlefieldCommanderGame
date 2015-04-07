@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The UnitControlButton is a button that only works if a Unit is selected.
  */
 
 package engine.gui.overlays.buttons;

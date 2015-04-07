@@ -1,5 +1,6 @@
 /*
- * LevelManager manages Levels. 'Nuff said.
+ * The LevelManager class manages a single Level object, which contains the
+ * Entities that the user is interested in.
  */
 
 package engine.world;
@@ -104,8 +105,8 @@ public class LevelManager {
     public static int getFrequencyOfThinking(){ return BRAIN_CYCLE_RATE; }
     
     /*
-     * This subclass is meant to create a Thread that only this class can used.
-     * The purpose of the thread is to execute the simulation.
+     * This subclass is meant to create a Thread that only this class can use.
+     * The purpose of the thread is to execute and cycle the simulation in real time.
     */
     private static class WorldThread extends Thread {
         private static boolean run = false;

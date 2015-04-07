@@ -11,6 +11,12 @@ package engine.physics;
 public class Vector {
     private double magnitude, XZ, Y;
     
+    /**
+     * Creates a Vector with the provided values.
+     * @param magnitude
+     * @param angle_xz
+     * @param angle_y
+     */
     public Vector(double magnitude, double angle_xz, double angle_y){
         this.magnitude = magnitude;
         XZ = angle_xz;
@@ -18,14 +24,33 @@ public class Vector {
         fixValues();
     }
     
+    /**
+     * Creates a Vector of equal direction to the provided Vector, but with a [possibly] different direction.
+     * @param v The old Vector.
+     * @param factor The number to multiply the old Vector's magnitude by to get the new Vector.
+     */
     public Vector(Vector v, double factor){
         this(v.magnitude * factor, v.XZ, v.Y);
     }
     
+    /**
+     * Creates a Vector between two Coordinates.
+     * @param from
+     * @param to
+     */
     public Vector(Coordinate from, Coordinate to){
         this(from.X(), from.Y(), from.Z(), to.X(), to.Y(), to.Z());
     }
     
+    /**
+     * Creates a Vector spanning from point 1 to 2.
+     * @param x1
+     * @param y1
+     * @param z1
+     * @param x2
+     * @param y2
+     * @param z2
+     */
     public Vector(double x1, double y1, double z1, double x2, double y2, double z2){
         double x = x2 - x1, y = y2 - y1, z = z2 - z1;
         double xz = Math.sqrt(Math.pow(x,2) + Math.pow(z,2));          
@@ -112,14 +137,30 @@ public class Vector {
         }
     }
     
+    /**
+     * Generates and returns a Unit Vector with the same direction, but a magnitude of 1.
+     * @return The Unit Vector.
+     */
     public Vector unitVector(){
         return new Vector(1, XZ, Y);
     }
     
+    /**
+     * Returns the Dot Product of two Vectors.
+     * @param a
+     * @param b
+     * @return The Dot Product.
+     */
     public static double dotProduct(Vector a, Vector b){
         return (a.getMagnitudeX() * b.getMagnitudeX() + a.getMagnitudeY() * b.getMagnitudeY() + a.getMagnitudeZ() * b.getMagnitudeZ());
     }
     
+    /**
+     * Gets the cosine between the two Vectors.
+     * @param a
+     * @param b
+     * @return The cosine.
+     */
     public static double cosOfAngleBetween(Vector a, Vector b){
         return dotProduct(a,b)/(a.magnitude * b.magnitude);
     }

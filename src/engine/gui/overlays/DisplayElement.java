@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A DisplayElement is used to draw images on the screen. Each one contains a
+ * GraphicImage object, which is a Decorator object that can be used for making
+ * unique designs for buttons, menus, etc.
  */
 
 package engine.gui.overlays;

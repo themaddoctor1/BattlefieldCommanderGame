@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Unit class is an abstract class that serves as the basis for
+ * the units featured in the game. It holds stats for health and items,
+ * and for a UnitBrain that controls the function of the Unit.
  */
 
 package engine.entities.units;
@@ -31,6 +31,10 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     
     protected Vector velocity = new Vector(0,0,0);
     
+    /**
+     * This field stores the UnitBrain used by a particular instance of Unit.
+     * The UnitBrain may differ between Units, but they can be used in the same way.
+     */
     protected UnitBrain brain;
     
     public Unit(Coordinate coord, float HP, float size, Inventory i, UnitBrain u) {
@@ -47,7 +51,7 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     }
     
     /**
-     * This method MUST be overwritten by ALL superclasses of this class.
+     * This method MUST be overwritten by ALL superclasses of this class that wish to act differently.
      * @param factor The time dilation.
      */
     @Override
@@ -87,7 +91,7 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     }
 
     @Override
-    public void harm(float amt) {hp = Math.max(hp - amt, 0);}
+    public final void harm(float amt) {hp = Math.max(hp - amt, 0);}
     
     public void fallDamage(){
         if(velocity.getMagnitude() > 5)
@@ -99,10 +103,10 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     }
     
     @Override
-    public void heal(float amt) { hp = Math.min(hp + amt, maxHP); }
+    public final void heal(float amt) { hp = Math.min(hp + amt, maxHP); }
 
     @Override
-    public void setHP(float amt) { hp = amt; }
+    public final void setHP(float amt) { hp = amt; }
 
     @Override
     public boolean testLiving() { return(hp <= 0); }

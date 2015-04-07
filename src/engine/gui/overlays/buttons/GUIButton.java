@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A GUIButton is used to run a command stored as a String whenever it is activated.
  */
 package engine.gui.overlays.buttons;
 

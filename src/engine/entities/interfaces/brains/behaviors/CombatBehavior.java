@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A CombatBehavior is any BrainBehavior that can be used to act out
+ * combat-based processes. Some CombatBehaviors can be written to
+ * use AwarenessProcesses that can be used to affect who is able
+ * to be attacked.
  */
 package engine.entities.interfaces.brains.behaviors;
 

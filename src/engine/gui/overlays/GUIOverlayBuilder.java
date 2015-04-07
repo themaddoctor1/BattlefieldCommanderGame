@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This class is meant to be a Factory Pattern-based class meant for providing
+ * a central place for writing and grabbing your own GUIOverlay objects.
  */
 
 package engine.gui.overlays;

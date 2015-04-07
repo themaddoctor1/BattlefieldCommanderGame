@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Controller class is meant to provide objects that manage key preses and
+ * mouse actions.
  */
 
 package engine.gui;

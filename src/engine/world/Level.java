@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A Level is a series of Entities that are continuously simulated and accessed
+ * by the LevelManager.
  */
 
 package engine.world;

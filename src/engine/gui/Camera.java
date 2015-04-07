@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Camera class is a class that allows for the use of cameras that use their
+ * own perspective to determine where certain elements should be drawn on the
+ * screen in order to accurately show their position on the display.
  */
 
 package engine.gui;

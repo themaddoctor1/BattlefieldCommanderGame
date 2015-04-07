@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * An Inventory stores Items, and allows them to be accessed.
  */
 
 package engine.entities.items;
@@ -13,7 +11,7 @@ import java.util.ArrayList;
  * @author Christopher Hittner
  */
 public class Inventory {
-    private ArrayList<Item> items = new ArrayList<Item>();
+    private ArrayList<Item> items = new ArrayList<>();
     
     public Inventory(ArrayList<Item> stuff){
         try{

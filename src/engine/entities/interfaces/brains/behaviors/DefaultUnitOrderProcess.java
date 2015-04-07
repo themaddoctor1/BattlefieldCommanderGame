@@ -29,13 +29,13 @@ public class DefaultUnitOrderProcess extends OrderProcess{
             getOwner().setMove(true);
             getOwner().setShoot(true);
             
-            getOwner().giveOrder("move to " + order.substring(7), FactionManager.getFactionOf(owner));
+            getOwner().giveOrder("move to " + order.substring(7), FactionManager.getFactionOf(getOwner().getName()));
             
         } else if(order.indexOf("board ") == 0){
             
             String moveOrder = "move to " + order.substring(6);
             
-            getOwner().giveOrder(moveOrder, FactionManager.getFactionOf(owner));
+            getOwner().giveOrder(moveOrder, FactionManager.getFactionOf(getOwner().getName()));
             
             getOwner().setBoard(true);
             

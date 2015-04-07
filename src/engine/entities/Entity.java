@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * The Entity class is the basic template upon which everything you see in
+ * the game is based on. This includes people, vehicles, bullets, and so on.
  */
 
 package engine.entities;

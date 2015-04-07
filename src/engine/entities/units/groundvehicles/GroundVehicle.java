@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A GroundVehicle is an object that moves like a car. It can be
+ * used to describe cars, tanks, etc.
  */
 package engine.entities.units.groundvehicles;
 
@@ -30,6 +29,20 @@ public class GroundVehicle extends Unit implements CarriesTroops {
     protected GroundVehicle[] vehicles;
     protected AirUnit[] fliers;
     
+    /**
+     *
+     * @param coord The initial position.
+     * @param HP The base health.
+     * @param size The radius.
+     * @param i The Unit's inventory.
+     * @param vel The maximum speed.
+     * @param acc The vehicle's 
+     * @param troopCapacity The amount of Soldiers the craft can carry.
+     * @param vehicleSpace The number of GroundVehicles the craft can carry.
+     * @param flierSpace The number of AirUnits the craft can carry.
+     * @param requiresPilot Whether or not the craft requires a pilot.
+     * @param name The name of the craft.
+     */
     public GroundVehicle(Coordinate coord, float HP, float size, Inventory i, double vel, double acc, int troopCapacity, int vehicleSpace, int flierSpace, boolean requiresPilot, String name) {
         super(coord, HP, size, i, new GroundVehicleBrain(name));
         MAX_VEL = vel;
