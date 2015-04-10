@@ -14,9 +14,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 
-/* @author Christopher Hittner
-
-
+/*
+ * @author Christopher Hittner
 */
 public class Controller {
     
@@ -138,13 +137,16 @@ public class Controller {
             target = c.X() + " " + c.Z();
         }
         
-        for(String nm : UnitSelection.getSelectedUnits()){
-            if(GUI.getGUI().getController().getKeyboardState(6))        //A
+        for(int i = UnitSelection.getSelectedUnits().size() - 1; i >= 0; i--) try{
+            String nm = UnitSelection.getSelectedUnits().get(i);
+            if(GUI.getGUI().getController().getKeyboardState(6))        //The attack key (default is "A") is held down
                 GUI.getGUI().parseUserInput(nm + " attack " + target, (byte) 0);
-            else if(GUI.getGUI().getController().getKeyboardState(7))   //B
+            else if(GUI.getGUI().getController().getKeyboardState(7))   //The attack key (default is "B") is held down
                 GUI.getGUI().parseUserInput(nm + " board " + target, (byte) 0);
             else
                 GUI.getGUI().parseUserInput(nm + " move to " + target, (byte) 0);
+        } catch(Exception e){
+            UnitSelection.getSelectedUnits().remove(i);
         }
     }
     
@@ -162,9 +164,11 @@ public class Controller {
             GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(270),0));
         if(getKeyboardState(5) && getKeyboardState(6)){
             UnitSelection.getSelectedUnits().clear();
-            for(Unit u : LevelManager.getLevel().getUnits())
+            for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++){
+                Unit u = LevelManager.getLevel().getUnits().get(i);
                 if(FactionManager.getFactionOf(u.getName()) == 0 || getKeyboardState(4))
                     UnitSelection.getSelectedUnits().add(u.getName());
+            }
         }
     }
 

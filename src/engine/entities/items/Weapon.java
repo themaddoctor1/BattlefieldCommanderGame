@@ -79,13 +79,18 @@ public class Weapon extends Item{
         Vector vel = new Vector(dir,projVel);
         vel.addVectorToThis(LevelManager.getLevel().getUnit(nm).getVelocity());
         
-        LevelManager.getLevel().getProjectiles().add(new Projectile(start, vel, projMass, projExpPow, nm));
+        fireProjectile(start, vel, nm);
         
         lastUsed = System.currentTimeMillis();
         
         ammo.modAmt(-1);
     }
-
+    
+    public void fireProjectile(Coordinate start, Vector vel, String nm){
+        
+        LevelManager.getLevel().getProjectiles().add(new Projectile(start, vel, projMass, projExpPow, nm));
+    }
+    
     public double getMuzzleVelocity() {
         return projVel;
     }

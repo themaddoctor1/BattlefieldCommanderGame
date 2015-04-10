@@ -47,6 +47,18 @@ public class InventoryBuilder {
         return inv;
     }
     
+    public static Inventory buildDemolitionsLoadout(){
+        Inventory inv = new Inventory(null);
+        
+        //Primary Weapon - AT4
+        inv.addItem(new RocketLauncher(6.7 , "AT4", new Resource("HEDP 502", 5), 290, 2.5, 200, 5, 0.015, 250));
+        
+        //Sidearm - M9
+        inv.addItem(new Weapon(0.952, "M9", new Resource("9x19mm Parabellum",120),381,0.0075,0.1,0.5,0.6));
+        
+        return inv;
+    }
+    
     public static Inventory buildHumveeLoadout(){
         Inventory inv = new Inventory(null);
         
@@ -60,7 +72,7 @@ public class InventoryBuilder {
         Inventory inv = new Inventory(null);
         
         //Main Cannon - 120mm Gun
-        inv.addItem(new Weapon(1190, "Rheinmetall 120mm Gun", new Resource("120mm Shell",40),1700,5,100,10,3.6));
+        inv.addItem(new Weapon(1190, "Rheinmetall 120mm Gun", new Resource("120mm Shell",40),1700,5,500,10,3.6));
         
         //Secondary - M2
         inv.addItem(new Weapon(17, "M2", new Resource(".50 BMG",50),890,0.045,0.1,0.11,3.6));

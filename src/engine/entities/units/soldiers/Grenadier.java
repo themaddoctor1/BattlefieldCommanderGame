@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package engine.entities.units.soldiers;
 
 import engine.entities.items.Inventory;
@@ -12,12 +11,12 @@ import engine.physics.Coordinate;
 
 /**
  *
- * @author Christopher Hittner
+ * @author Christopher
  */
-public class Sniper extends Soldier{
+public class Grenadier extends Soldier{
 
-    public Sniper(Coordinate coord, String name) {
-        super(coord, InventoryBuilder.buildSniperLoadout(), name);
+    public Grenadier(Coordinate coord, String name) {
+        super(coord, InventoryBuilder.buildDemolitionsLoadout(), name);
     }
-
+    
 }

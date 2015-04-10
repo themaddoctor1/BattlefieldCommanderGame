@@ -5,28 +5,25 @@
  */
 package engine.main;
 
-import engine.entities.TerrainElement;
+import engine.entities.*;
 import engine.entities.units.helicopters.*;
 import engine.entities.units.groundvehicles.*;
-import engine.entities.units.soldiers.Infantry;
+import engine.entities.units.soldiers.*;
 import engine.entities.units.*;
 import engine.entities.units.helicopters.AH64_Apache;
-import engine.entities.units.testUnits.Drop_Pod;
-import engine.entities.units.testUnits.Hydra_Bot;
-import engine.game.DropPodSpawner;
-import engine.game.FactionManager;
-import engine.game.SpawnManager;
-import engine.gui.GUI;
-import engine.physics.Coordinate;
-import engine.world.LevelManager;
+import engine.entities.units.testUnits.*;
+import engine.game.*;
+import engine.gui.*;
+import engine.physics.*;
+import engine.world.*;
 import java.util.ArrayList;
 
 /**
  *
- * @author Christopher
+ * @author Christopher Hittner
  */
 public class Main {
-
+    
     /**
      * @param args the command line arguments
      */
@@ -34,10 +31,10 @@ public class Main {
         
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,0,0), dim));
         try{
-            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(20,0,0),"Alice"));
-            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(0,0,20),"Bob"));
-            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(-20,0,0),"Chris"));
-            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(0,0,-20),"Dave"));
+            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(20,0,0),"Alice"));
+            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(0,0,20),"Bob"));
+            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(-20,0,0),"Chris"));
+            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(0,0,-20),"Dave"));
             //LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(4,61,4),"Edward"));
             //LevelManager.getLevel().getUnits().add(new Stryker(new Coordinate(-4,65,-4), "Rhino"));
             
@@ -45,7 +42,7 @@ public class Main {
             //FactionManager.addFactionMember(passenger.getName(), (byte)(0));
             //LevelManager.getLevel().getUnits().add(new DropPod(new Coordinate(30,1000,0), "Viking", passenger));
             
-            SpawnManager.addSpawner(new DropPodSpawner(0,0,40,5,(byte)1));
+            SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,(byte) 1));
             
         } catch(Exception e){e.printStackTrace();}
         //LevelManager.getLevel().getUnits().add(new AH64_Apache(new Coordinate(0,80,0), "Hunter"));
@@ -60,12 +57,11 @@ public class Main {
         //FactionManager.setRelationship(0, 1, true);
         
         FactionManager.addFaction("1", null, null);
-        FactionManager.setRelationship((byte)0, (byte)1, false);
+        FactionManager.setRelationship((byte) 0, (byte) 1, false);
         
         //double[] size = {15,60,15};
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,size[1]/2,0),size));
         
-                
         LevelManager.startSimulation();
         
         while(true){

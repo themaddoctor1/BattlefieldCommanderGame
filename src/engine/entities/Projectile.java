@@ -24,6 +24,7 @@ public class Projectile extends MovableEntity{
         super(coord);
         velocity = vel;
         mass = mss;
+        explosiveEnergy = expPow;
         shooter = sh;
     }
 
@@ -37,8 +38,7 @@ public class Projectile extends MovableEntity{
             if(Coordinate.relativeDistance(u.getPosition(), coordinate) < u.getSize() && !u.getName().equals(shooter)){
                 u.harm((float)(velocity.getMagnitude()*mass));
                 
-                if(u.getHP() <= 0)
-                    LevelManager.addEvent(shooter + " killed " + u.getName());
+                if(u.getHP() <= 0) LevelManager.addEvent(shooter + " killed " + u.getName());
                 
                 killSelf();
                 return;
@@ -58,9 +58,11 @@ public class Projectile extends MovableEntity{
         if(explosiveEnergy > 0) for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++){
             Unit u = LevelManager.getLevel().getUnits().get(i);
             //Hurt all Units in range of its explosive damage
-            u.harm((float)(Math.max(explosiveEnergy/
-                    (Coordinate.relativeDistance(coordinate, u.coordinate))
-                 - 25200, 0)));
+            double splash = Math.max(explosiveEnergy/
+                    (Coordinate.relativeDistance(coordinate, u.coordinate) - (u.getSize())/2.0)
+                 - 100, 0);
+            
+            u.harm((float)(splash));
             
             
         }
