@@ -63,7 +63,7 @@ public class HydraBotBrain extends UnitBrain{
             String nm = name.substring(0, name.indexOf("-") + 1) + pastClones;
             pastClones++;
             
-            int factID = FactionManager.getFactionOf(name);
+            String factID = FactionManager.getFactionOf(name);
             
             LevelManager.getLevel().addUnit(new Hydra_Bot(position, nm), factID);
             

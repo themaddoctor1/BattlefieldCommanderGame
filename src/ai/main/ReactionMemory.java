@@ -36,15 +36,15 @@ public class ReactionMemory extends Memory{
     */
     private double calculatePolarValue(String param){
         String parameter = param;//param.substring(param.indexOf("^") + 1);
-        byte fact = FactionManager.getFactionOf(parameter.substring(0, parameter.indexOf(" killed ")));
+        String fact = FactionManager.getFactionOf(parameter.substring(0, parameter.indexOf(" killed ")));
         
         try {
             String actor = param.substring(0, parameter.indexOf(" killed "));
             String victim = param.substring(parameter.indexOf(" killed ") + 8);
             
-            if(FactionManager.getFactionOf(victim) == fact)
+            if(FactionManager.getFactionOf(victim).equals(fact))
                 return -2;
-            else if(FactionManager.getFactionOf(actor) == fact)
+            else if(FactionManager.getFactionOf(actor).equals(fact))
                 return 2;
             else if(FactionManager.getRelationship(FactionManager.getFactionOf(actor), fact) == FactionManager.getRelationship(FactionManager.getFactionOf(victim), fact))
                 return 0;

@@ -9,13 +9,13 @@ package engine.game;
  * @author Christopher
  */
 public abstract class Spawner {
-    private final byte FACTION_ID;
+    private final String FACTION_ID;
     
-    public Spawner(byte id){
+    public Spawner(String id){
         FACTION_ID = id;
     }
 
     public abstract void cycle(double time);
     
-    public final byte factionID(){ return FACTION_ID; }
+    public final String factionID(){ return FACTION_ID; }
 }

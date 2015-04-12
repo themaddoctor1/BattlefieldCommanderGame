@@ -50,19 +50,19 @@ public class WorldDrawer {
         try{
             for(int i = 0; i < l.getUnits().size(); i++){
                 Unit u = l.getUnits().get(i);
-                byte factID = FactionManager.getFactionOf(u.getName());
+                String factID = FactionManager.getFactionOf(u.getName());
                 
-                if(factID == 0){
+                if("0".equals(factID)){
                     //Player's Unit
                     g2.setColor(new Color(0,0,255,128));
-                } else if(factID > 0){
-                    if(FactionManager.getRelationship((byte)0,factID))
+                } else /*if(!"0".equals(factID))*/{
+                    if(FactionManager.getRelationship("0",factID))
                         g2.setColor(new Color(0,255,0,128));
                     else
                         g2.setColor(new Color(255,0,0,128));
-                } else {
+                /*} else {
                     //Unknown Unit
-                    g2.setColor(new Color(0,0,0,128));
+                    g2.setColor(new Color(0,0,0,128));*/
                 }
                 int[] position = c.getPlanarCoordinate(u.getPosition());
                 
@@ -180,7 +180,7 @@ public class WorldDrawer {
     }
     
     public static void drawUnitTooltip(Graphics2D g2, Unit u, int x, int y){
-        byte faction = FactionManager.getFactionOf(u.getName());
+        String faction = FactionManager.getFactionOf(u.getName());
         int width = Math.max(150,8*u.getName().length() + 50);
         
         g2.setColor(new Color(g2.getColor().getRed(), g2.getColor().getGreen(), g2.getColor().getBlue(), 64));
@@ -189,7 +189,7 @@ public class WorldDrawer {
         
         g2.setColor(Color.BLACK);
         
-        if(faction == 0 || FactionManager.getRelationship((byte) 0, faction))
+        if("0".equals(faction) || FactionManager.getRelationship("0", faction))
             g2.drawString("Name: " + u.getName(), x + 14, y+25);
         else
             g2.drawString("Name: Unknown", x + 14, y+25);
@@ -197,9 +197,9 @@ public class WorldDrawer {
         String type = u.getType();
         g2.drawString("Unit Type: " + type, x + 14, y+40);
         
-        if(faction == 0)
+        if("0".equals(faction))
             g2.drawString("Relationship: Yours", x + 14, y+55);
-        else if(FactionManager.getRelationship((byte) 0, faction))
+        else if(FactionManager.getRelationship("0", faction))
             g2.drawString("Relationship: Ally", x + 14, y+55);
         else
             g2.drawString("Relationship: Hostile", x + 14, y+55);

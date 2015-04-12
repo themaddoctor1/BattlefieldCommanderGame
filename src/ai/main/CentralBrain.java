@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class CentralBrain extends Thread{
     private final ArrayList<ActionMemory> pastActions = new ArrayList<>();
     private ArrayList<GeneralizedActionMemory> ratings = new ArrayList<>();
-    private final byte factionID;
+    private final String factionID;
     
-    public CentralBrain(byte factID){
+    public CentralBrain(String factID){
         factionID = factID;
     }
     
@@ -169,7 +169,7 @@ public class CentralBrain extends Thread{
             GeneralizedActionMemory g = null;
             
             //If the Unit is commanded by this Brain
-            if(FactionManager.getFactionOf(u.getName()) == factionID) for(GeneralizedActionMemory gam : ratings){
+            if(FactionManager.getFactionOf(u.getName()).equals(factionID)) for(GeneralizedActionMemory gam : ratings){
                 if(gam.getActorType().equals(u.getType()))
                     try{
                         if(g.getValueOf() < gam.getValueOf())
@@ -202,8 +202,8 @@ public class CentralBrain extends Thread{
                 String yourUnit = FactionManager.getMembers(factionID).get((int)(Math.random() * FactionManager.getMembers(factionID).size()));
                 
                 String enemyUnit = null;
-                for(int i = 0; i < FactionManager.getNumFactions(); i++) if(!FactionManager.getRelationship(factionID, (byte) i))
-                    enemyUnit = FactionManager.getMembers((byte)i).get((int)(Math.random() * FactionManager.getMembers((byte)i).size()));
+                for(int i = 0; i < FactionManager.getNumFactions(); i++) if(!FactionManager.getRelationship(factionID, (i + "")))
+                    enemyUnit = FactionManager.getMembers(i + "").get((int)(Math.random() * FactionManager.getMembers(i + "").size()));
 
                 if(LevelManager.getLevel().getUnit(enemyUnit) != null){
                     try {

@@ -102,9 +102,9 @@ public class Level {
     public ArrayList<TerrainElement> getTerrain(){ return terrain; }
     public ArrayList<Unit> getUnits(){ return units; }
     
-    public void addUnit(Unit u, int factID){
+    public void addUnit(Unit u, String factID){
         units.add(u);
-        FactionManager.addFactionMember(u.getName(), (byte)(factID));
+        FactionManager.addFactionMember(u.getName(), (factID));
     }
     
     

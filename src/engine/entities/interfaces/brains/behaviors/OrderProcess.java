@@ -34,10 +34,10 @@ public abstract class OrderProcess extends BrainBehavior{
         process.setOwner(this.getOwner().getName());
     }
     
-    public final void giveOrder(String order, byte factID){
+    public final void giveOrder(String order, String factID){
         
         try {
-        if(factID != FactionManager.getFactionOf(this.getOwner().getName()))
+        if(!factID.equals(FactionManager.getFactionOf(this.getOwner().getName())))
             return;
         } catch(Exception e){
             

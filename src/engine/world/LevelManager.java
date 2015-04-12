@@ -120,7 +120,7 @@ public class LevelManager {
             setRunStatus(true);
             
             for(int i = 0; i < FactionManager.getNumFactions() - 1; i++){
-                AI_Manager.addBrain(new CentralBrain((byte) (i+1)));
+                AI_Manager.addBrain(new CentralBrain("" + (i+1)));
                 AI_Manager.getBrains().get(i).start();
             }
             

@@ -42,7 +42,7 @@ public class Main {
             //FactionManager.addFactionMember(passenger.getName(), (byte)(0));
             //LevelManager.getLevel().getUnits().add(new DropPod(new Coordinate(30,1000,0), "Viking", passenger));
             
-            SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,(byte) 1));
+            SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"1"));
             
         } catch(Exception e){e.printStackTrace();}
         //LevelManager.getLevel().getUnits().add(new AH64_Apache(new Coordinate(0,80,0), "Hunter"));
@@ -53,11 +53,11 @@ public class Main {
         //LevelManager.getLevel().getUnits().add(new Hydra_Bot(new Coordinate(-20, 0, -20), "Hydra"));
         
         for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++)
-            FactionManager.addFactionMember(LevelManager.getLevel().getUnits().get(i).getName(), (byte)(0));
+            FactionManager.addFactionMember(LevelManager.getLevel().getUnits().get(i).getName(), "0");
         //FactionManager.setRelationship(0, 1, true);
         
         FactionManager.addFaction("1", null, null);
-        FactionManager.setRelationship((byte) 0, (byte) 1, false);
+        FactionManager.setRelationship("0", "1", false);
         
         //double[] size = {15,60,15};
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,size[1]/2,0),size));

@@ -63,7 +63,7 @@ public abstract class UnitBrain {
      * @param order The order being given.
      * @param factionID The user's faction ID, which is used to authenticate who the user is.
      */
-    public final void giveOrder(String order, byte factionID){
+    public final void giveOrder(String order, String factionID){
         orderProcess.giveOrder(order, factionID);
     }
     

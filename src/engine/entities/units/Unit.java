@@ -132,7 +132,7 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
 
     public String getName() { return brain.getName(); }
     
-    public void giveOrder(String order, byte factionID){
+    public void giveOrder(String order, String factionID){
         brain.giveOrder(order, factionID);
     }
 

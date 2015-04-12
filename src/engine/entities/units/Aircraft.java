@@ -24,7 +24,7 @@ public class Aircraft extends AirUnit{
         super(coord, HP, size, i, new AircraftBrain(name), troopCapacity, vehicleSpace, flierSpace, requiresPilot, acc, topSpeed);
         MIN_VEL = minSpeed;
         TURN_RATE = turnRate;
-        brain.giveOrder("orbit " + (coord.X()) + " " + (coord.Z()+Math.sqrt(minSpeed*topSpeed)/Math.pow(turnRate, 2)), (byte)-2);
+        brain.giveOrder("orbit " + (coord.X()) + " " + (coord.Z()+Math.sqrt(minSpeed*topSpeed)/Math.pow(turnRate, 2)), "-2");
         velocity = new Vector(Math.sqrt(minSpeed*topSpeed),0,0);
     }
     

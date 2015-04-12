@@ -17,7 +17,7 @@ public class DropPodSpawner extends Spawner{
     private double time = 0;
     private static int count = 0;
     
-    public DropPodSpawner(int x, int y, int radius, int time, byte id) {
+    public DropPodSpawner(int x, int y, int radius, int time, String id) {
         super(id);
         X = x;
         Y = y;

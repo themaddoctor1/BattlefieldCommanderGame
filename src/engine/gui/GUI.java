@@ -136,7 +136,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                parseUserInput(inputField.getText(),(byte) 0);
+                parseUserInput(inputField.getText(),0 + "");
                 inputField.setText("");
             }
         });
@@ -247,7 +247,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     //-----------------------
     
     
-    public void parseUserInput(String input, byte factID){
+    public void parseUserInput(String input, String factID){
         lastInput = input.toLowerCase();
         
         //System.out.println("Faction " + factID + " order: " + input);
