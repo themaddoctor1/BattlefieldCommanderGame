@@ -54,7 +54,7 @@ public class Projectile extends MovableEntity{
         coordinate.addVector(new Vector(velocity, factor));
     }
 
-    private void killSelf() {
+    protected void killSelf() {
         if(explosiveEnergy > 0) for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++){
             Unit u = LevelManager.getLevel().getUnits().get(i);
             //Hurt all Units in range of its explosive damage
