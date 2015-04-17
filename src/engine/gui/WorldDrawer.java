@@ -52,11 +52,11 @@ public class WorldDrawer {
                 Unit u = l.getUnits().get(i);
                 String factID = FactionManager.getFactionOf(u.getName());
                 
-                if("0".equals(factID)){
+                if("Player".equals(factID)){
                     //Player's Unit
                     g2.setColor(new Color(0,0,255,128));
-                } else /*if(!"0".equals(factID))*/{
-                    if(FactionManager.getRelationship("0",factID))
+                } else /*if(!"Player".equals(factID))*/{
+                    if(FactionManager.getRelationship("Player",factID))
                         g2.setColor(new Color(0,255,0,128));
                     else
                         g2.setColor(new Color(255,0,0,128));
@@ -189,7 +189,7 @@ public class WorldDrawer {
         
         g2.setColor(Color.BLACK);
         
-        if("0".equals(faction) || FactionManager.getRelationship("0", faction))
+        if("Player".equals(faction) || FactionManager.getRelationship("Player", faction))
             g2.drawString("Name: " + u.getName(), x + 14, y+25);
         else
             g2.drawString("Name: Unknown", x + 14, y+25);
@@ -197,9 +197,9 @@ public class WorldDrawer {
         String type = u.getType();
         g2.drawString("Unit Type: " + type, x + 14, y+40);
         
-        if("0".equals(faction))
+        if("Player".equals(faction))
             g2.drawString("Relationship: Yours", x + 14, y+55);
-        else if(FactionManager.getRelationship("0", faction))
+        else if(FactionManager.getRelationship("Player", faction))
             g2.drawString("Relationship: Ally", x + 14, y+55);
         else
             g2.drawString("Relationship: Hostile", x + 14, y+55);

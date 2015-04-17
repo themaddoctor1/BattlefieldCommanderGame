@@ -28,7 +28,7 @@ public class LevelManager {
     
     private static int cycles = 0;
     
-    private static final int BRAIN_CYCLE_RATE = 10;
+    private static final int BRAIN_CYCLE_RATE = 1;
     
     public static void addEvent(String event){
         events.add(event);
@@ -119,10 +119,14 @@ public class LevelManager {
         public void run(){
             setRunStatus(true);
             
-            for(int i = 0; i < FactionManager.getNumFactions() - 1; i++){
-                AI_Manager.addBrain(new CentralBrain("" + (i+1)));
-                AI_Manager.getBrains().get(i).start();
+            for(String s : FactionManager.getFactionNames()){
+                    if(!s.equals("Player")){
+                    AI_Manager.addBrain(new CentralBrain(s));
+                }
             }
+            
+            for(CentralBrain cb : AI_Manager.getBrains())
+                cb.start();
             
             confirmCheck();
             

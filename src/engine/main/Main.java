@@ -29,6 +29,10 @@ public class Main {
      */
     public static void main(String[] args) {
         
+        FactionManager.addFaction("Player", null, null);
+        FactionManager.addFaction("Test_Enemy", null, null);
+        FactionManager.addFaction("Test_Ally", null, null);
+        
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,0,0), dim));
         try{
             LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(20,0,0),"Alice"));
@@ -42,7 +46,8 @@ public class Main {
             //FactionManager.addFactionMember(passenger.getName(), (byte)(0));
             //LevelManager.getLevel().getUnits().add(new DropPod(new Coordinate(30,1000,0), "Viking", passenger));
             
-            SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"1"));
+            SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
+            SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
             
         } catch(Exception e){e.printStackTrace();}
         //LevelManager.getLevel().getUnits().add(new AH64_Apache(new Coordinate(0,80,0), "Hunter"));
@@ -53,11 +58,11 @@ public class Main {
         //LevelManager.getLevel().getUnits().add(new Hydra_Bot(new Coordinate(-20, 0, -20), "Hydra"));
         
         for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++)
-            FactionManager.addFactionMember(LevelManager.getLevel().getUnits().get(i).getName(), "0");
+            FactionManager.addFactionMember(LevelManager.getLevel().getUnits().get(i).getName(), "Player");
         //FactionManager.setRelationship(0, 1, true);
         
-        FactionManager.addFaction("1", null, null);
-        FactionManager.setRelationship("0", "1", false);
+        FactionManager.setRelationship("Player", "Test_Enemy", false); //This is actually useless in theory, but it's here just for in case.
+        FactionManager.setRelationship("Player", "Test_Ally", true);
         
         //double[] size = {15,60,15};
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,size[1]/2,0),size));

@@ -250,7 +250,8 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     public void parseUserInput(String input, String factID){
         lastInput = input.toLowerCase();
         
-        //System.out.println("Faction " + factID + " order: " + input);
+        if(false)
+            System.out.println("[" + factID + "] " + input);
         
         /*
         Possible Commands:

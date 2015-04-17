@@ -140,11 +140,11 @@ public class Controller {
         for(int i = UnitSelection.getSelectedUnits().size() - 1; i >= 0; i--) try{
             String nm = UnitSelection.getSelectedUnits().get(i);
             if(GUI.getGUI().getController().getKeyboardState(6))        //The attack key (default is "A") is held down
-                GUI.getGUI().parseUserInput(nm + " attack " + target, "0");
+                GUI.getGUI().parseUserInput(nm + " attack " + target, "Player");
             else if(GUI.getGUI().getController().getKeyboardState(7))   //The attack key (default is "B") is held down
-                GUI.getGUI().parseUserInput(nm + " board " + target, "0");
+                GUI.getGUI().parseUserInput(nm + " board " + target, "Player");
             else
-                GUI.getGUI().parseUserInput(nm + " move to " + target, "0");
+                GUI.getGUI().parseUserInput(nm + " move to " + target, "Player");
         } catch(Exception e){
             UnitSelection.getSelectedUnits().remove(i);
         }
@@ -166,7 +166,7 @@ public class Controller {
             UnitSelection.getSelectedUnits().clear();
             for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++){
                 Unit u = LevelManager.getLevel().getUnits().get(i);
-                if("0".equals(FactionManager.getFactionOf(u.getName())) || getKeyboardState(4))
+                if("Player".equals(FactionManager.getFactionOf(u.getName())) || getKeyboardState(4))
                     UnitSelection.getSelectedUnits().add(u.getName());
             }
         }

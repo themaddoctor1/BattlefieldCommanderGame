@@ -23,11 +23,11 @@ import java.util.ArrayList;
  *
  * @author Christopher
  */
-public class Drop_Pod extends Unit implements CarriesTroops{
+public class DropPod extends Unit implements CarriesTroops{
     
     protected Soldier[] soldiers = {null};
 
-    public Drop_Pod(Coordinate coord, String nm, Soldier s) {
+    public DropPod(Coordinate coord, String nm, Soldier s) {
         super(coord, 1000, 2, null, new DumbBrain(nm));
         
         soldiers[0] = s;
@@ -79,7 +79,7 @@ public class Drop_Pod extends Unit implements CarriesTroops{
 
     @Override
     public ArrayList<Unit> unloadAll(boolean removePilot) {
-        ArrayList<Unit> units = new ArrayList<Unit>();
+        ArrayList<Unit> units = new ArrayList<>();
         
         boolean pilotIn = removePilot;
         
@@ -94,9 +94,12 @@ public class Drop_Pod extends Unit implements CarriesTroops{
             //Moves it to the center of the transport for future relocation.
             units.get(i).getPosition().addVector(new Vector(units.get(i).getPosition(),this.getPosition()));
             //Makes sure it is outside.
-            units.get(i).getPosition().addVector(new Vector(getSize() + units.get(i).getSize(), 2*Math.PI*(Math.random() + i/units.size()), 0));
+            units.get(i).getPosition().addVector(new Vector(getSize() + units.get(i).getSize(), 2*Math.PI*i/units.size(), 0));
             //Makes sure it is sitting on the ground.
             units.get(i).getPosition().addVector(new Vector(units.get(i).getSize() - units.get(i).getPosition().Y(), 0, Math.toRadians(90)));
+            //Sets velocity equal to the vehicle's velocity.
+            units.get(i).getVelocity().multiplyMagnitude(0);
+            units.get(i).getVelocity().addVectorToThis(velocity);
         }
         
         
@@ -113,20 +116,8 @@ public class Drop_Pod extends Unit implements CarriesTroops{
                     if(s == null)
                         return true;
             }
+        
         return false;
-        
-    }
-    
-    @Override
-    public void killSelf(){
-        super.killSelf();
-        
-        for(Soldier s : soldiers){
-            if(s != null)
-                LevelManager.addEvent(s.getName() + " died aboard " + getName() + ".");
-            //FactionManager.removeMember(s.getName());
-        }
-        soldiers = null;
         
     }
     

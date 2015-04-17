@@ -26,17 +26,17 @@ public class DropPodMovementBehavior extends MovementBehavior {
     public void actMovement(Unit me, double factor) {
         Coordinate position = me.getPosition();
         Vector velocity = me.getVelocity();
-        double acc = 40;
-        
-        if(     -velocity.getMagnitudeY() > 0.9*Math.sqrt(2*(acc - 9.81) * (position.Y() - me.getSize()))
-                && position.Y() > me.getSize() + 0.01
+        if(     -velocity.getMagnitudeY() >= 0.9*Math.sqrt(Math.abs(2*(40 - 10) * (position.Y() - me.getSize())))
+                && !me.onGround()
                 ){
             
-            Vector acceleration = (new Vector(velocity.unitVector(),-acc*factor));
+            //System.out.println(velocity.getMagnitude() + "  >=  " + 0.9*Math.sqrt(Math.abs(2*(40 - 10) * (position.Y() - me.getSize()))));
+            
+            Vector acceleration = (new Vector(40*factor, 0, Math.toRadians(90)));
             //System.out.println(acc);
             me.getVelocity().addVectorToThis(acceleration);
         } else if(position.Y() > 10){
-            Vector acceleration = (new Vector(acc*factor,0,Math.toRadians(-90)));
+            Vector acceleration = (new Vector(0.9 * 40*factor,0,Math.toRadians(-90)));
             me.getVelocity().addVectorToThis(acceleration);
         }
         

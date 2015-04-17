@@ -24,8 +24,10 @@ public class CentralBrain extends Thread{
         factionID = factID;
     }
     
+    @Override
     public void run(){
         ArrayList<String> prevOrders = new ArrayList<>();
+        
         while(true){
             try{
                 Thread.sleep(10);
@@ -36,9 +38,9 @@ public class CentralBrain extends Thread{
             //For every possible order
             for(String s : orders){
                 //Checks to see if this order has been done already
-                boolean alreadyDone = false;
-                for(String t : prevOrders)
-                    alreadyDone = alreadyDone || s.equals(t);
+                boolean alreadyDone = prevOrders.contains(s);
+                
+                //System.out.println("[" + alreadyDone + "] " + s);
                 
                 //If it hasn't, then try to execute it.
                 if(!alreadyDone){
@@ -186,10 +188,12 @@ public class CentralBrain extends Thread{
                 for(int j = 0; j < LevelManager.getLevel().getUnits().size(); j++){
                     Unit v = LevelManager.getLevel().getUnits().get(j);
                     if(v.getType().equals(order.substring(order.length() - v.getType().length()))){
-                        order = order.substring(0, order.length() - v.getType().length()) + v.getType();
+                        order = order.substring(0, order.length() - v.getType().length()) + v.getName();
                         break;
                     }
                 }
+                
+                System.out.println(order);
                 
                 orders.add(order);
             }

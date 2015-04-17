@@ -43,7 +43,7 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
         hp = HP;
         radius = size;
         if(i == null)
-            inv = new Inventory(new ArrayList<Item>());
+            inv = new Inventory(new ArrayList<>());
         else
             inv = i;
         
@@ -95,7 +95,7 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     
     public void fallDamage(){
         if(velocity.getMagnitude() > 5)
-            harm((float)(Math.pow(velocity.getMagnitude(),2)*Math.sqrt(maxHP) * (-Math.sin(velocity.getAngleY()) - 0.1)/2.0 ));
+            harm((float)(Math.pow(velocity.getMagnitude(),2)*Math.cbrt(maxHP) * Math.pow(Math.sin(velocity.getAngleY()) * 0.9,2)/2.0 ));
         if(hp <= 0){
             killSelf();
             LevelManager.addEvent(getName() + " died from fall damage.");
