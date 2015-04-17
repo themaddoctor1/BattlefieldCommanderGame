@@ -8,6 +8,7 @@ package ai.main;
 import engine.entities.units.Unit;
 import engine.game.FactionManager;
 import engine.gui.GUI;
+import engine.physics.Coordinate;
 import engine.world.LevelManager;
 import java.util.ArrayList;
 
@@ -185,17 +186,24 @@ public class CentralBrain extends Thread{
                 String order = g.getName();
                 order = u.getName() + order.substring(u.getType().length());
                 
+                Unit target = null;
+                
+                //Choose a good target for the Entity
                 for(int j = 0; j < LevelManager.getLevel().getUnits().size(); j++){
                     Unit v = LevelManager.getLevel().getUnits().get(j);
-                    if(v.getType().equals(order.substring(order.length() - v.getType().length()))){
-                        order = order.substring(0, order.length() - v.getType().length()) + v.getName();
-                        break;
+                    if(v.getType().equals(order.substring(order.length() - v.getType().length())) && !u.getName().equals(v.getName()) && !FactionManager.getRelationship(FactionManager.getFactionOf(u.getName()), FactionManager.getFactionOf(v.getName()))){
+                        if(target == null)
+                            target = v;
+                        else if(Coordinate.relativeDistance(u.getPosition(), v.getPosition()) <= Coordinate.relativeDistance(u.getPosition(), target.getPosition()))
+                            target = v;
+                        
                     }
                 }
                 
-                System.out.println(order);
-                
-                orders.add(order);
+                if(target != null){
+                    order = order.substring(0, order.length() - target.getType().length()) + target.getName();
+                    orders.add(order);
+                }
             }
             
         }

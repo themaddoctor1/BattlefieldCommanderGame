@@ -23,12 +23,12 @@ import java.util.ArrayList;
  *
  * @author Christopher
  */
-public class DropPod extends Unit implements CarriesTroops{
+public class Drop_Pod extends Unit implements CarriesTroops{
     
     protected Soldier[] soldiers = {null};
 
-    public DropPod(Coordinate coord, String nm, Soldier s) {
-        super(coord, 1000, 2, null, new DumbBrain(nm));
+    public Drop_Pod(Coordinate coord, String nm, Soldier s) {
+        super(coord, 1000, (float)1.5, null, new DumbBrain(nm));
         
         soldiers[0] = s;
         
@@ -38,8 +38,10 @@ public class DropPod extends Unit implements CarriesTroops{
     public void cycle(double factor){
         super.cycle(factor);
         
-        if(getPosition().Y() <= getSize() + 0.1 && getVelocity().getMagnitude() < 1)
+        if(getPosition().Y() <= getSize() + 0.1 && getVelocity().getMagnitude() < 1){
             LevelManager.getLevel().getUnits().addAll(unloadAll(true));
+            this.killSelf();
+        }
     }
     
     
@@ -94,7 +96,7 @@ public class DropPod extends Unit implements CarriesTroops{
             //Moves it to the center of the transport for future relocation.
             units.get(i).getPosition().addVector(new Vector(units.get(i).getPosition(),this.getPosition()));
             //Makes sure it is outside.
-            units.get(i).getPosition().addVector(new Vector(getSize() + units.get(i).getSize(), 2*Math.PI*i/units.size(), 0));
+            units.get(i).getPosition().addVector(new Vector(getSize()/2 + units.get(i).getSize(), 2*Math.PI*i/units.size(), 0));
             //Makes sure it is sitting on the ground.
             units.get(i).getPosition().addVector(new Vector(units.get(i).getSize() - units.get(i).getPosition().Y(), 0, Math.toRadians(90)));
             //Sets velocity equal to the vehicle's velocity.
