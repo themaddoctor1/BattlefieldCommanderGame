@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
 /*
  * @author Christopher Hittner
 */
-public class Controller {
+public abstract class Controller {
     
     private boolean mousePressed;
     
@@ -58,14 +58,14 @@ public class Controller {
      * @param code The key code
      * @param value The boolean value
      */
-    public void setKeyboardState(int code, boolean value){
+    public final void setKeyboardState(int code, boolean value){
         for(int i  = 0; i < keyCodes.length; i++){
             if(code == keyCodes[i])
                 status[i] = value;
         }
     }
     
-    public boolean getKeyboardState(int index){
+    public final boolean getKeyboardState(int index){
         return status[index];
     }
     
@@ -73,18 +73,18 @@ public class Controller {
      * Sets whether or not the mouse is being pressed.
      * @param value The boolean value
      */
-    public void setMouseState(boolean value){
+    public final void setMouseState(boolean value){
         mousePressed = value;
     }
     
-    public int getMouseX(){ return GUI.getGUI().getMousePosition().x; }
-    public int getMouseY(){ return GUI.getGUI().getMousePosition().y; }
+    public final int getMouseX(){ return GUI.getGUI().getMousePosition().x; }
+    public final int getMouseY(){ return GUI.getGUI().getMousePosition().y; }
     
-    public boolean getMouseState(){
+    public final boolean getMouseState(){
         return mousePressed;
     }
     
-    public int getNumerOfControls(){ return keyCodes.length; }
+    public final int getNumerOfControls(){ return keyCodes.length; }
     
     public String getName(){
         return name;
@@ -101,74 +101,16 @@ public class Controller {
         return result;
     }
     
-    public void executeLeftClick(MouseEvent me){
-        
-        if(getKeyboardState(4))
-            UnitSelection.shiftClick(me.getX(), me.getY());
-        else
-            UnitSelection.click(me.getX(), me.getY());
-    }
+    public abstract void executeLeftClick(MouseEvent me);
+    public abstract void executeRightClick(MouseEvent me);
     
-    public void executeRightClick(MouseEvent me){
-        
-        
-        double dispX = me.getX() - GUI.getGUI().getCenterX();
-        double dispY = me.getY() - GUI.getGUI().getCenterY();
-        double disp = Math.sqrt(Math.pow(dispX, 2) + Math.pow(dispY, 2));
-        double theta = disp / GUI.getGUI().getPixelsPerRadian();
-        double lambda = Math.atan(dispY/dispX);
-        if(dispX < 0)
-            lambda = lambda + Math.toRadians(180);
-        lambda += GUI.getGUI().getCamera().getAxialRot() - Math.PI/2.0;
-        
-        lambda = Math.PI - lambda;
-        
-        Coordinate c = new Coordinate(
-                  (Math.tan(theta) * Math.cos(lambda)) * GUI.getGUI().getCamera().getPosition().Y() + GUI.getGUI().getCamera().getPosition().X()
-                , 0
-                , (Math.tan(theta) * Math.sin(lambda)) * GUI.getGUI().getCamera().getPosition().Y() + GUI.getGUI().getCamera().getPosition().Z()
-        );
-        
-        String target;
-        
-        try {
-            target = UnitSelection.getClickedUnits(me.getX(), me.getY()).get(0);
-        } catch(Exception e){
-            target = c.X() + " " + c.Z();
-        }
-        
-        for(int i = UnitSelection.getSelectedUnits().size() - 1; i >= 0; i--) try{
-            String nm = UnitSelection.getSelectedUnits().get(i);
-            if(GUI.getGUI().getController().getKeyboardState(6))        //The attack key (default is "A") is held down
-                GUI.getGUI().parseUserInput(nm + " attack " + target, "Player");
-            else if(GUI.getGUI().getController().getKeyboardState(7))   //The attack key (default is "B") is held down
-                GUI.getGUI().parseUserInput(nm + " board " + target, "Player");
-            else
-                GUI.getGUI().parseUserInput(nm + " move to " + target, "Player");
-        } catch(Exception e){
-            UnitSelection.getSelectedUnits().remove(i);
-        }
-    }
+    public abstract void execute();
     
-    public void execute(){
-        
-        double cameraSpeed = 0.2;
-        
-        if(getKeyboardState(0))
-            GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(0),0));
-        if(getKeyboardState(1))
-            GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(180),0));
-        if(getKeyboardState(2))
-            GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(90),0));
-        if(getKeyboardState(3))
-            GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(270),0));
-        if(getKeyboardState(5) && getKeyboardState(6)){
-            UnitSelection.getSelectedUnits().clear();
-            for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++){
-                Unit u = LevelManager.getLevel().getUnits().get(i);
-                if("Player".equals(FactionManager.getFactionOf(u.getName())) || getKeyboardState(4))
-                    UnitSelection.getSelectedUnits().add(u.getName());
-            }
+    public void setKeyCodes(int[] codes){
+        keyCodes = codes;
+        status = new boolean[codes.length];
+        for(boolean b : status){
+            b = false;
         }
     }
 

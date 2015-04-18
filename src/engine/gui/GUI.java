@@ -88,7 +88,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
         
         */
         
-        controller = new Controller("Controller", keys);
+        controller = new GameController("Controller");
         
         //Creates a JFrame with a title
         frame = new JFrame("Battlefield Commander");
@@ -250,7 +250,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     public void parseUserInput(String input, String factID){
         lastInput = input.toLowerCase();
         
-        if(true)
+        if(false)
             System.out.println("[" + factID + "] " + input);
         
         /*

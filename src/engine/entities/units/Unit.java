@@ -43,7 +43,7 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
         hp = HP;
         radius = size;
         if(i == null)
-            inv = new Inventory(new ArrayList<>());
+            inv = new Inventory(new ArrayList<Item>());
         else
             inv = i;
         
