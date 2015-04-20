@@ -36,6 +36,7 @@ public class ButtonOverlay {
         for(GUIButton b : buttons){
             result = b.click(x, y) || result;
         }
+        
         return result;
     }
 

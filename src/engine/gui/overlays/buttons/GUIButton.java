@@ -41,7 +41,7 @@ public abstract class GUIButton extends DisplayElement{
     
     public void clickEvent(){
         for(String name : UnitSelection.getSelectedUnits())
-            GUI.getGUI().parseUserInput(name + " " + CMD, "0");
+            GUI.getGUI().parseUserInput(name + " " + CMD, "Player");
     }
     
 }

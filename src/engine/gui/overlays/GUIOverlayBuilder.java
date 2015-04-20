@@ -28,9 +28,14 @@ public class GUIOverlayBuilder {
         gameOverlay = new GUIOverlay();
         ButtonOverlay buttons = new ButtonOverlay();
         try{
-        buttons.addButton(new UnitControlButton(width - 45, height - 95, 20, 20, "unload all units", new SquareIcon(new ArrowIcon(Math.toRadians(0)))));
-        buttons.addButton(new UnitControlButton(width - 105, height - 95, 20, 20, "ascend", new SquareIcon(new ArrowIcon(Math.toRadians(90)))));
-        buttons.addButton(new UnitControlButton(width - 75, height - 95, 20, 20, "descend", new SquareIcon(new ArrowIcon(Math.toRadians(270)))));
+            buttons.addButton(new UnitControlButton(width - 45, height - 95, 20, 20, "unload all units", new SquareIcon(new ArrowIcon(Math.toRadians(0)))));
+            buttons.addButton(new UnitControlButton(width - 105, height - 95, 20, 20, "ascend", new SquareIcon(new ArrowIcon(Math.toRadians(90)))));
+            buttons.addButton(new UnitControlButton(width - 75, height - 95, 20, 20, "descend", new SquareIcon(new ArrowIcon(Math.toRadians(270)))));
+            
+            buttons.addButton(new UnitControlButton(width - 165, height - 95, 20, 20, "open fire", new SquareIcon(new LetterIcon("A"))));
+            buttons.addButton(new UnitControlButton(width - 135, height - 95, 20, 20, "hold fire", new SquareIcon(new LetterIcon("H"))));
+            
+            
         } catch(Exception e){
             e.printStackTrace();
         }
