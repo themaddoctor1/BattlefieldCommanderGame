@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.combatbehavior;
 
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.items.Item;
@@ -19,13 +19,24 @@ import java.util.ArrayList;
  *
  * @author Christopher
  */
-public class BasicCombatBehavior extends CombatBehavior{
+public class LimitedAngleCombatBehavior extends CombatBehavior{
+    
+    private final double thetaMin, thetaMax;
+    
+    public LimitedAngleCombatBehavior(UnitBrain brain, double min, double max){
+        super(brain);
+        thetaMin = min;
+        thetaMax = max;
+    }
     
     
-    public BasicCombatBehavior(UnitBrain brain){ super(brain); }
-    public BasicCombatBehavior(){ super(); }
+    public LimitedAngleCombatBehavior(double min, double max){
+        super();
+        thetaMin = min;
+        thetaMax = max;
+    }
     
-
+    
     @Override
     public void actCombat(Unit me, double factor) {
         
@@ -37,7 +48,9 @@ public class BasicCombatBehavior extends CombatBehavior{
         }
         
         try {
+            
             //Tries to find a unit to shoot at, if possible
+            
             ArrayList<Unit> units;
             try {
                 units = getOwner().getAwarenessProcess().getUnitsAwareOf(me);
@@ -100,6 +113,7 @@ public class BasicCombatBehavior extends CombatBehavior{
      * @param me The owner of the Brain. A Unit object will send itself to fulfill this parameter.
      * @param targ The Unit being targeted.
      */
+    @Override
     public void attackUnit(Unit me, Unit targ){
         
         me.getBrain().getAwarenessProcess().combatNotification(targ);
@@ -114,10 +128,12 @@ public class BasicCombatBehavior extends CombatBehavior{
                 if(Math.pow(V, 4) > 9.81*(9.81*Math.pow(X, 2)+2*Y*Math.pow(V, 2)) && ((Weapon) weapon).getAmmo().amt() > 0){
                     double angle = Math.atan((Math.pow(V, 2) - Math.sqrt( Math.pow(V, 4) - 9.81 * (9.81 * Math.pow(X, 2) + 2*Y*Math.pow(V, 2) ) ) ) / (9.81*X));
                     
-                    ((Weapon) weapon).use(1,"{" + me.getName() + "}{" + Math.cos((new Vector(me.getPosition(),targ.getPosition())).getAngleXZ()) + "," + Math.atan(angle) + "," + Math.sin((new Vector(me.getPosition(),targ.getPosition())).getAngleXZ()) + "}");
+                    if(thetaMin <= angle && thetaMax >= angle){
+                        ((Weapon) weapon).use(1,"{" + me.getName() + "}{" + Math.cos((new Vector(me.getPosition(),targ.getPosition())).getAngleXZ()) + "," + Math.atan(angle) + "," + Math.sin((new Vector(me.getPosition(),targ.getPosition())).getAngleXZ()) + "}");
 
-                    me.getBrain().setAttack(true);
-                    return;
+                        me.getBrain().setAttack(true);
+                        return;
+                    }
                 }
             }
         

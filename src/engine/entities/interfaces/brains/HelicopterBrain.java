@@ -6,6 +6,11 @@
 
 package engine.entities.interfaces.brains;
 
+import engine.entities.interfaces.brains.behaviors.movementbehavior.HoveringMovementBehavior;
+import engine.entities.interfaces.brains.behaviors.orderprocess.DefaultUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.orderprocess.HelicopterOrderProcess;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.BasicCombatBehavior;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.interfaces.brains.behaviors.*;
 import engine.entities.units.helicopters.Helicopter;
 import engine.entities.units.Unit;

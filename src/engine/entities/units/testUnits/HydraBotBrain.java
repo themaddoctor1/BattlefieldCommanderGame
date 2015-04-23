@@ -6,6 +6,11 @@
 
 package engine.entities.units.testUnits;
 
+import engine.entities.interfaces.brains.behaviors.movementbehavior.WalkingMovementBehavior;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.MeleeCombatBehavior;
+import engine.entities.interfaces.brains.behaviors.orderprocess.DefaultUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.orderprocess.GroundUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.interfaces.brains.behaviors.*;
 import engine.entities.items.Item;

@@ -6,6 +6,12 @@
 
 package engine.entities.interfaces.brains;
 
+import engine.entities.interfaces.brains.behaviors.movementbehavior.WalkingMovementBehavior;
+import engine.entities.interfaces.brains.behaviors.orderprocess.DefaultUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.orderprocess.GroundUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.LimitedLeadingCombatBehavior;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.HearingAwarenessProcess;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.interfaces.brains.behaviors.*;
 import engine.entities.units.Unit;
 
@@ -18,7 +24,7 @@ public class SoldierBrain extends UnitBrain{
     public SoldierBrain(String nm) {
         super(
                 nm, 
-                new LimitedAngleCombatBehavior(Math.toRadians(-80), Math.toRadians(45)), 
+                new LimitedLeadingCombatBehavior(Math.toRadians(20)), //new LimitedAngleCombatBehavior(Math.toRadians(-80), Math.toRadians(45))
                 new WalkingMovementBehavior(), 
                 new GroundUnitOrderProcess(new DefaultUnitOrderProcess()),
                 new SightAwarenessProcess(new HearingAwarenessProcess(4.0), Math.toRadians(75), Math.toRadians(0.1)));

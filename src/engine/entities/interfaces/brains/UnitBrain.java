@@ -7,10 +7,10 @@
 package engine.entities.interfaces.brains;
 
 import engine.entities.interfaces.CarriesTroops;
-import engine.entities.interfaces.brains.behaviors.AwarenessProcess;
-import engine.entities.interfaces.brains.behaviors.CombatBehavior;
-import engine.entities.interfaces.brains.behaviors.MovementBehavior;
-import engine.entities.interfaces.brains.behaviors.OrderProcess;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.AwarenessProcess;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.CombatBehavior;
+import engine.entities.interfaces.brains.behaviors.movementbehavior.MovementBehavior;
+import engine.entities.interfaces.brains.behaviors.orderprocess.OrderProcess;
 import engine.entities.items.Item;
 import engine.entities.items.Weapon;
 import engine.entities.units.Unit;

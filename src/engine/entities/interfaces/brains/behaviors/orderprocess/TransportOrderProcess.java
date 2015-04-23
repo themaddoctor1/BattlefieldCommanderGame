@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.orderprocess;
 
 import engine.entities.interfaces.CarriesTroops;
 import engine.entities.units.groundvehicles.GroundVehicle;

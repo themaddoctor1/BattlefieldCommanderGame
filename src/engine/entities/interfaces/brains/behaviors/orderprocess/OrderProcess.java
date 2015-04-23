@@ -3,9 +3,10 @@
  * orders (pretty much self-explanatory, in my opinion). It uses the Decorator 
  */
 
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.orderprocess;
 
 import engine.entities.interfaces.brains.UnitBrain;
+import engine.entities.interfaces.brains.behaviors.BrainBehavior;
 import engine.game.FactionManager;
 import engine.world.LevelManager;
 

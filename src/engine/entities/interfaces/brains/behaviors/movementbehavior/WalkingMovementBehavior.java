@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.movementbehavior;
 
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.items.Item;

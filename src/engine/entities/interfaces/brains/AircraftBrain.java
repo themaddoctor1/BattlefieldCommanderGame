@@ -6,11 +6,11 @@
 
 package engine.entities.interfaces.brains;
 
-import engine.entities.interfaces.brains.behaviors.AircraftOrderProcess;
-import engine.entities.interfaces.brains.behaviors.BasicCombatBehavior;
-import engine.entities.interfaces.brains.behaviors.DefaultUnitOrderProcess;
-import engine.entities.interfaces.brains.behaviors.FlyingMovementBehavior;
-import engine.entities.interfaces.brains.behaviors.SightAwarenessProcess;
+import engine.entities.interfaces.brains.behaviors.orderprocess.AircraftOrderProcess;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.BasicCombatBehavior;
+import engine.entities.interfaces.brains.behaviors.orderprocess.DefaultUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.movementbehavior.FlyingMovementBehavior;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.units.Aircraft;
 import engine.entities.units.Unit;
 import engine.game.FactionManager;

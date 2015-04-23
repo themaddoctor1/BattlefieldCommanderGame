@@ -6,7 +6,7 @@
 package engine.entities.units.testUnits;
 
 import engine.entities.interfaces.brains.UnitBrain;
-import engine.entities.interfaces.brains.behaviors.MovementBehavior;
+import engine.entities.interfaces.brains.behaviors.movementbehavior.MovementBehavior;
 import engine.entities.units.Unit;
 import engine.physics.*;
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.combatbehavior;
 
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.items.Item;
@@ -19,21 +19,19 @@ import java.util.ArrayList;
  *
  * @author Christopher
  */
-public class LimitedAngleCombatBehavior extends CombatBehavior{
+public class LimitedLeadingCombatBehavior extends CombatBehavior{
     
-    private final double thetaMin, thetaMax;
+    private final double thetaMax;
     
-    public LimitedAngleCombatBehavior(UnitBrain brain, double min, double max){
+    public LimitedLeadingCombatBehavior(UnitBrain brain, double theta){
         super(brain);
-        thetaMin = min;
-        thetaMax = max;
+        thetaMax = theta;
     }
     
     
-    public LimitedAngleCombatBehavior(double min, double max){
+    public LimitedLeadingCombatBehavior(double theta){
         super();
-        thetaMin = min;
-        thetaMax = max;
+        thetaMax = theta;
     }
     
     
@@ -113,6 +111,7 @@ public class LimitedAngleCombatBehavior extends CombatBehavior{
      * @param me The owner of the Brain. A Unit object will send itself to fulfill this parameter.
      * @param targ The Unit being targeted.
      */
+    @Override
     public void attackUnit(Unit me, Unit targ){
         
         me.getBrain().getAwarenessProcess().combatNotification(targ);
@@ -123,11 +122,18 @@ public class LimitedAngleCombatBehavior extends CombatBehavior{
                 double V = ((Weapon) weapon).getMuzzleVelocity();
                 double X = Math.sqrt(Math.pow(me.getPosition().X() - targ.getPosition().X(), 2) + Math.pow(me.getPosition().Z() - targ.getPosition().Z(), 2));
                 double Y = targ.getPosition().Y() - me.getPosition().Y();
-
+                
+                //Makes sure the Unit will only aim a certain amount away from the target in order to hit it
                 if(Math.pow(V, 4) > 9.81*(9.81*Math.pow(X, 2)+2*Y*Math.pow(V, 2)) && ((Weapon) weapon).getAmmo().amt() > 0){
                     double angle = Math.atan((Math.pow(V, 2) - Math.sqrt( Math.pow(V, 4) - 9.81 * (9.81 * Math.pow(X, 2) + 2*Y*Math.pow(V, 2) ) ) ) / (9.81*X));
                     
-                    if(thetaMin <= angle && thetaMax >= angle){
+                    if(thetaMax >= Math.acos(Vector.cosOfAngleBetween(
+                            new Vector(me.getPosition(), targ.getPosition()),
+                            new Vector(1, new Vector(
+                                    me.getPosition(), 
+                                    targ.getPosition()).getAngleXZ(), 
+                                    angle)
+                    ))){
                         ((Weapon) weapon).use(1,"{" + me.getName() + "}{" + Math.cos((new Vector(me.getPosition(),targ.getPosition())).getAngleXZ()) + "," + Math.atan(angle) + "," + Math.sin((new Vector(me.getPosition(),targ.getPosition())).getAngleXZ()) + "}");
 
                         me.getBrain().setAttack(true);

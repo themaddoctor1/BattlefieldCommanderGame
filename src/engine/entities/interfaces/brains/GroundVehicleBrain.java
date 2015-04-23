@@ -5,6 +5,12 @@
  */
 package engine.entities.interfaces.brains;
 
+import engine.entities.interfaces.brains.behaviors.movementbehavior.DrivingMovementBehavior;
+import engine.entities.interfaces.brains.behaviors.orderprocess.DefaultUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.orderprocess.TransportOrderProcess;
+import engine.entities.interfaces.brains.behaviors.orderprocess.GroundUnitOrderProcess;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.BasicCombatBehavior;
+import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.interfaces.brains.behaviors.*;
 import engine.entities.units.groundvehicles.GroundVehicle;
 import engine.entities.units.Unit;

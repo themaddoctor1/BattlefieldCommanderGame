@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.orderprocess;
 
 import engine.physics.Coordinate;
 import engine.physics.Vector;

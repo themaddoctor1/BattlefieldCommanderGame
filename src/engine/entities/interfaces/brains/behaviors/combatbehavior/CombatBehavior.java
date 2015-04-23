@@ -4,9 +4,10 @@
  * use AwarenessProcesses that can be used to affect who is able
  * to be attacked.
  */
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.combatbehavior;
 
 import engine.entities.interfaces.brains.UnitBrain;
+import engine.entities.interfaces.brains.behaviors.BrainBehavior;
 import engine.entities.units.Unit;
 
 /**

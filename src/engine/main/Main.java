@@ -35,10 +35,10 @@ public class Main {
         
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,0,0), dim));
         try{
-            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(20,0,0),"Alice"));
-            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(0,0,20),"Bob"));
-            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(-20,0,0),"Chris"));
-            LevelManager.getLevel().getUnits().add(new Grenadier(new Coordinate(0,0,-20),"Dave"));
+            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(20,0,0),"Alice"));
+            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(0,0,20),"Bob"));
+            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(-20,0,0),"Chris"));
+            LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(0,0,-20),"Dave"));
             //LevelManager.getLevel().getUnits().add(new Infantry(new Coordinate(4,61,4),"Edward"));
             //LevelManager.getLevel().getUnits().add(new Stryker(new Coordinate(-4,65,-4), "Rhino"));
             

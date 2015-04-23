@@ -4,8 +4,9 @@
  * of AwarenessProcesses to be used in conjunction.
  */
 
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.awarenesprocess;
 
+import engine.entities.interfaces.brains.behaviors.BrainBehavior;
 import engine.entities.units.Unit;
 import engine.world.LevelManager;
 import java.util.ArrayList;

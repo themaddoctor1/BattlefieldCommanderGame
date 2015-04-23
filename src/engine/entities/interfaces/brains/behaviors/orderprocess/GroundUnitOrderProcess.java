@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.orderprocess;
 
 import engine.game.FactionManager;
 import engine.physics.Coordinate;
@@ -13,9 +13,9 @@ import engine.physics.Coordinate;
  *
  * @author Christopher Hittner
  */
-public class AircraftOrderProcess extends OrderProcess{
+public class GroundUnitOrderProcess extends OrderProcess{
 
-    public AircraftOrderProcess(OrderProcess op) {
+    public GroundUnitOrderProcess(OrderProcess op) {
         super(op);
     }
 
@@ -23,15 +23,9 @@ public class AircraftOrderProcess extends OrderProcess{
     protected boolean processOrder(String order) {
         
         
-        if(order.indexOf("attack ") == 0 || order.indexOf("defend ") == 0){
-            //Units won't attack allies, so it may or may not matter (unless the code changes, of course)
-            
-            getOwner().setMove(true);
-            getOwner().setShoot(true);
-            
-            processOrder("orbit " + order.substring(7));
-            
-        } else if(order.indexOf("follow ") == 0){
+        getOwner().setBoard(false);
+        
+        if(order.indexOf("follow ") == 0){
             
             getOwner().setMove(true);
             
@@ -39,9 +33,13 @@ public class AircraftOrderProcess extends OrderProcess{
             
             getOwner().getDestinations().clear();
             getOwner().getDestinations().add(targetName);
-        } else if(order.indexOf("orbit ") == 0){
+        } else if(order.equals("hold position") || order.equals("stop")){
+            getOwner().setMove(false);
+        } else if(order.indexOf("move to ") == 0){
             
-            String coord = order.substring(6);
+            getOwner().setMove(true);
+            
+            String coord = order.substring(8);
             getOwner().getDestinations().clear();
             
             try {
@@ -49,15 +47,16 @@ public class AircraftOrderProcess extends OrderProcess{
                 coord = coord.substring(coord.indexOf(" ") + 1);
                 double Z = Double.parseDouble(coord);
                 
-                
-                getOwner().getDestinations().add(new Coordinate(X,0,Z));
+                getOwner().getDestinations().add(new Coordinate(X,0.5,Z));
             } catch(Exception e){
+                getOwner().setMove(true);
                 
-                String targetName = coord;
+                String targetName = order.substring(8);
+                
+                //getOwner().setBoard(false);
                 
                 getOwner().getDestinations().add("[UNIT]" + targetName);
             }
-            
         } else {
             return false;
         }

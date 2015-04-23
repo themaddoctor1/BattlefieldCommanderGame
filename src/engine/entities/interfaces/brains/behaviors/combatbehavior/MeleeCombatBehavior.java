@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package engine.entities.interfaces.brains.behaviors;
+package engine.entities.interfaces.brains.behaviors.combatbehavior;
 
+import engine.entities.interfaces.brains.behaviors.combatbehavior.CombatBehavior;
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.units.Unit;
 import engine.game.FactionManager;
