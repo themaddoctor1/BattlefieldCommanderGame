@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A SpontaneousSpawner will randomly create Units within the designated region.
  */
 package engine.main;
 
+import engine.game.spawning.*;
 import engine.entities.*;
 import engine.entities.units.helicopters.*;
 import engine.entities.units.groundvehicles.*;

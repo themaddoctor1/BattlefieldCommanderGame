@@ -1,10 +1,12 @@
 /*
- * This Spawner spawns Drop Pods over the map.
+ * A DropPodSpawner spawns Drop Pods over the map.
  */
-package engine.game;
+package engine.game.spawning;
 
+import engine.game.spawning.Spawner;
 import engine.entities.units.soldiers.*;
 import engine.entities.units.testUnits.Drop_Pod;
+import engine.game.FactionManager;
 import engine.physics.Coordinate;
 import engine.world.LevelManager;
 

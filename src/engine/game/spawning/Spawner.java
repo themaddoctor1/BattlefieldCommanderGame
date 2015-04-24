@@ -2,7 +2,7 @@
  * The Spawner class is an abstract class upon which Spawners for different types
  * of factions can be created.
  */
-package engine.game;
+package engine.game.spawning;
 
 /**
  *

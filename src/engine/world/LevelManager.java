@@ -8,7 +8,7 @@ package engine.world;
 import ai.main.AI_Manager;
 import ai.main.CentralBrain;
 import engine.game.FactionManager;
-import engine.game.SpawnManager;
+import engine.game.spawning.SpawnManager;
 import engine.gui.GUI;
 import java.util.ArrayList;
 

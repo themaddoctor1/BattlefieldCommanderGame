@@ -1,7 +1,7 @@
 /*
  * This class serves as a manager for all of the spawning done in the program.
  */
-package engine.game;
+package engine.game.spawning;
 
 import java.util.ArrayList;
 
