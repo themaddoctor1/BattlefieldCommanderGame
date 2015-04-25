@@ -70,10 +70,11 @@ public class CentralBrain extends Thread{
         try {
             if(!this.isAlive())
                 this.start();
+            else
+                active = true;
         } catch(Exception e){
             if(this.isAlive())
                 active = true;
-            System.out.println(active);
         }
     }
     
