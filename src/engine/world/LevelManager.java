@@ -30,6 +30,8 @@ public class LevelManager {
     
     private static final int BRAIN_CYCLE_RATE = 1;
     
+    private static WorldThread thread = null;
+    
     public static void addEvent(String event){
         events.add(event);
         for(CentralBrain cb : AI_Manager.getBrains()){
@@ -91,9 +93,13 @@ public class LevelManager {
     
     
     public static void startSimulation(){
-        if(WorldThread.getRunStatus())
-            return;
-        (new WorldThread(2500)).start();
+        if(!WorldThread.getRunStatus())
+            if(thread == null){
+                thread = new WorldThread(2500);
+                thread.start();
+            } else {
+                WorldThread.setRunStatus(true);
+            }
         
     }
     
@@ -103,6 +109,7 @@ public class LevelManager {
     
     public static int getCyclesSoFar(){ return cycles;}
     public static int getFrequencyOfThinking(){ return BRAIN_CYCLE_RATE; }
+    public static boolean getRunStatus(){return WorldThread.getRunStatus();}
     
     /*
      * This subclass is meant to create a Thread that only this class can use.
@@ -119,35 +126,37 @@ public class LevelManager {
         public void run(){
             setRunStatus(true);
             
-            for(String s : FactionManager.getFactionNames()){
+            if(AI_Manager.getBrains().isEmpty()) for(String s : FactionManager.getFactionNames()){
                     if(!s.equals("Player")){
-                    AI_Manager.addBrain(new CentralBrain(s));
+                        AI_Manager.addBrain(new CentralBrain(s));
                 }
             }
             
             for(CentralBrain cb : AI_Manager.getBrains())
-                cb.start();
+                cb.activate();
             
             confirmCheck();
             
-            while(run){
+            while(true){
                 double time = confirmCheck();
                 while(time < CYCLE_TIME){
                     GUI.getGUI().redraw();
                     time += confirmCheck();
                 }
-                if(time < 0.05)
+                if(time < 0.05 && run)
                     cycleLevel(time);
+                    
             }
+            
+            
+            //for(CentralBrain cb : AI_Manager.getBrains())
+            //    cb.pause();
+            
         }
         
-        private static void setRunStatus(boolean val){
-            run = val;
-        }
+        private static void setRunStatus(boolean val){ run = val; }
         
-        private static boolean getRunStatus() {
-            return run;
-        }
+        private static boolean getRunStatus() { return run; }
         
     }
     

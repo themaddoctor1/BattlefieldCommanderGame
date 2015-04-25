@@ -113,6 +113,10 @@ public abstract class Controller {
             b = false;
         }
     }
+    
+    public int getKeyCodeOf(int index){
+        return keyCodes[index];
+    }
 
     
     

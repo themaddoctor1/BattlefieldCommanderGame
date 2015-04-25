@@ -5,6 +5,7 @@
 package engine.gui.overlays.buttons;
 
 import engine.gui.overlays.GraphicImage;
+import engine.scripts.EncapsulatedScript;
 
 /**
  *
@@ -15,8 +16,8 @@ public class RechargeButton extends GUIButton {
     private long lastAct;
     private final double chargeTimeMillis;
     
-    public RechargeButton(int x, int y, int w, int h, String cmd, GraphicImage bi, double time) {
-        super(x, y, w, h, cmd, bi);
+    public RechargeButton(int x, int y, int w, int h, EncapsulatedScript es, GraphicImage bi, double time) {
+        super(x, y, w, h, es, bi);
         chargeTimeMillis = 1000 * time;
         lastAct = System.currentTimeMillis();
     }

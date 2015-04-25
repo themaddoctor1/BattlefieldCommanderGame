@@ -10,6 +10,7 @@ import engine.entities.units.Unit;
 import engine.game.FactionManager;
 import engine.physics.Coordinate;
 import engine.physics.Vector;
+import engine.scripts.PauseScript;
 import engine.world.LevelManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -31,8 +32,12 @@ public class GameController extends Controller{
                 , KeyEvent.VK_CONTROL       //Hold with A to select all units
                 , KeyEvent.VK_A             //Hold to choose attack location when right-clicking
                 , KeyEvent.VK_B             //Hold to choose boarding target when right-clicking
+                , KeyEvent.VK_P        //Press to pause the game
         };
+        
         setKeyCodes(keys);
+        
+        setKeyboardState(keys[8], true);
     }
 
     @Override
@@ -49,12 +54,18 @@ public class GameController extends Controller{
         if(getKeyboardState(3))
             GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(270),0));
         if(getKeyboardState(5) && getKeyboardState(6)){
+            //Select all applicable units
             UnitSelection.getSelectedUnits().clear();
             for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++){
                 Unit u = LevelManager.getLevel().getUnits().get(i);
+                //If the Unit belongs to the player or the Shift key is pressed
                 if("Player".equals(FactionManager.getFactionOf(u.getName())) || getKeyboardState(4))
                     UnitSelection.getSelectedUnits().add(u.getName());
             }
+        }
+        if(!getKeyboardState(8)){
+            (new PauseScript(LevelManager.getRunStatus())).execute(null);
+            this.setKeyboardState(getKeyCodeOf(8), true);
         }
     }
     
@@ -99,11 +110,11 @@ public class GameController extends Controller{
         for(int i = UnitSelection.getSelectedUnits().size() - 1; i >= 0; i--) try{
             String nm = UnitSelection.getSelectedUnits().get(i);
             if(GUI.getGUI().getController().getKeyboardState(6))        //The attack key (default is "A") is held down
-                GUI.getGUI().parseUserInput(nm + " attack " + target, "Player");
+                GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " attack " + target, "Player");
             else if(GUI.getGUI().getController().getKeyboardState(7))   //The attack key (default is "B") is held down
-                GUI.getGUI().parseUserInput(nm + " board " + target, "Player");
+                GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " board " + target, "Player");
             else
-                GUI.getGUI().parseUserInput(nm + " move to " + target, "Player");
+                GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " move to " + target, "Player");
         } catch(Exception e){
             UnitSelection.getSelectedUnits().remove(i);
         }

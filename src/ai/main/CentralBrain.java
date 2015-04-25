@@ -20,6 +20,7 @@ public class CentralBrain extends Thread{
     private final ArrayList<ActionMemory> pastActions = new ArrayList<>();
     private ArrayList<GeneralizedActionMemory> ratings = new ArrayList<>();
     private final String factionID;
+    private boolean active = false;
     
     public CentralBrain(String factID){
         factionID = factID;
@@ -29,7 +30,11 @@ public class CentralBrain extends Thread{
     public void run(){
         ArrayList<String> prevOrders = new ArrayList<>();
         
+        active = true;
+        
         while(true){
+                
+            
             try{
                 Thread.sleep(10);
             } catch(InterruptedException e){}
@@ -44,9 +49,9 @@ public class CentralBrain extends Thread{
                 //System.out.println("[" + alreadyDone + "] " + s);
                 
                 //If it hasn't, then try to execute it.
-                if(!alreadyDone){
+                if(!alreadyDone && active){
                     try {
-                        GUI.getGUI().parseUserInput(s, factionID);
+                        GUI.getGUI().parseUserInput("UNIT_ORDER", s, factionID);
                         addActionMemory(new ActionMemory(s));
                     } catch(NullPointerException e){}
                 }
@@ -61,6 +66,20 @@ public class CentralBrain extends Thread{
         
     }
     
+    public void activate(){
+        try {
+            if(!this.isAlive())
+                this.start();
+        } catch(Exception e){
+            if(this.isAlive())
+                active = true;
+            System.out.println(active);
+        }
+    }
+    
+    public void pause(){
+        active = false;
+    }
     
     public ActionMemory getBestMemory(){
         ActionMemory result = pastActions.get(0);

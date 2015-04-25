@@ -136,7 +136,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                parseUserInput(inputField.getText(),0 + "");
+                parseUserInput("UNIT_ORDER", inputField.getText(),"Player");
                 inputField.setText("");
             }
         });
@@ -220,6 +220,11 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     public Camera getCamera(){ return camera; }
     
     
+    public void setGUIOverlay(GUIOverlay o){
+        overlay = o;
+    }
+    
+    
     //-----------------------
     //Controller
     //-----------------------
@@ -247,7 +252,14 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     //-----------------------
     
     
-    public void parseUserInput(String input, String factID){
+    public void parseUserInput(String prefix, String input, String factID){
+        if(prefix.equals("UNIT_ORDER"))
+            parseUnitOrder(input, factID);
+    }
+    
+    
+    public void parseUnitOrder(String input, String factID){
+        
         lastInput = input.toLowerCase();
         
         if(false)
@@ -391,6 +403,5 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
         
     }
 
-    
     
 }

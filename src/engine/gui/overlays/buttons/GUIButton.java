@@ -7,6 +7,7 @@ import engine.gui.GUI;
 import engine.gui.UnitSelection;
 import engine.gui.overlays.DisplayElement;
 import engine.gui.overlays.GraphicImage;
+import engine.scripts.EncapsulatedScript;
 import java.awt.Graphics;
 
 /**
@@ -15,12 +16,12 @@ import java.awt.Graphics;
  */
 public abstract class GUIButton extends DisplayElement{
     
-    public final String CMD;
+    public final EncapsulatedScript script;
     
     
-    public GUIButton(int x, int y, int w, int h, String cmd, GraphicImage bi){
+    public GUIButton(int x, int y, int w, int h, EncapsulatedScript es, GraphicImage bi){
         super(x,y,w,h,bi);
-        CMD = cmd;
+        script = es;
     }
     
     
@@ -40,8 +41,7 @@ public abstract class GUIButton extends DisplayElement{
     }
     
     public void clickEvent(){
-        for(String name : UnitSelection.getSelectedUnits())
-            GUI.getGUI().parseUserInput(name + " " + CMD, "Player");
+        script.execute(null);
     }
     
 }

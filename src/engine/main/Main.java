@@ -14,6 +14,7 @@ import engine.entities.units.testUnits.*;
 import engine.game.*;
 import engine.gui.*;
 import engine.physics.*;
+import engine.scripts.PauseScript;
 import engine.world.*;
 import java.util.ArrayList;
 
@@ -66,7 +67,9 @@ public class Main {
         //double[] size = {15,60,15};
         //LevelManager.getLevel().getTerrain().add(new TerrainElement(new Coordinate(0,size[1]/2,0),size));
         
+        
         LevelManager.startSimulation();
+        //(new PauseScript(true)).execute(null);
         
         while(true){
             GUI.getGUI().redraw();
