@@ -33,17 +33,23 @@ public class Projectile extends MovableEntity{
         
         velocity.addVectorToThis(new Vector(9.81 * factor, 0, -Math.toRadians(90)));
         
+        double forceDrag = -0.003 * Math.pow(velocity.getMagnitude(), 2) * (this.coordinate.Y() / 75000);
+        
+        //Air resistance
+        velocity.addVectorToThis(new Vector(velocity.unitVector(), forceDrag / mass * factor));
+        
         move(factor);
         for(Unit u : LevelManager.getLevel().getUnits())
             if(Coordinate.relativeDistance(u.getPosition(), coordinate) < u.getSize() && !u.getName().equals(shooter)){
-                u.harm((float)(velocity.getMagnitude()*mass));
+                u.harm((float)((velocity.getMagnitude())*mass));
                 
                 if(u.getHP() <= 0) LevelManager.addEvent(shooter + " killed " + u.getName());
                 
                 killSelf();
                 return;
             }
-        if(coordinate.Y() <= 0){
+        //If on the ground     or     momentum is less than 0.01
+        if(coordinate.Y() <= 0 || velocity.getMagnitude()*mass < 0.01){
             killSelf();
         }
         

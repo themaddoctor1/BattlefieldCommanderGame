@@ -92,7 +92,7 @@ public class GameController extends Controller{
             double theta = disp / GUI.getGUI().getPixelsPerRadian();
             double lambda = Math.atan(dispY/dispX);
             if(dispX < 0)
-                lambda = lambda + Math.toRadians(180);
+                lambda = lambda + Math.PI;
             lambda += GUI.getGUI().getCamera().getAxialRot() - Math.PI/2.0;
 
             lambda = Math.PI - lambda;

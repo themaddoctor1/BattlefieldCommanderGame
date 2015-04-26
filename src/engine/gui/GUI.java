@@ -106,6 +106,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
         
         overlay = GUIOverlayBuilder.getGameOverlay(width,height);
         
+        /*
         //Changes the Layout
         setLayout(new BorderLayout());
         //Creates a panel at the bottom
@@ -146,7 +147,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
         
         /////////////////////////
         /////////////////////////
-        
+        */
     }
     
     public void redraw(){
