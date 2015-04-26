@@ -172,25 +172,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     @Override
     public void paint(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        g2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        WorldDrawer.drawWorld(g2, camera);
-        g2.setColor(Color.BLACK);
         
-        //Center of screen crosshair
-        g2.drawLine(getCenterX(), getCenterY() - 15, getCenterX(), getCenterY() + 15);
-        g2.drawLine(getCenterX() - 15,getCenterY(),getCenterX() + 15,getCenterY());
-        
-        //Mouse crosshair
-        try{
-            int x = controller.getMouseX(), y = controller.getMouseY();
-            g2.drawLine(x, y - 15, x, y + 15);
-            g2.drawLine(x - 15, y, x + 15, y);
-        } catch(NullPointerException e){
-            
-        }
-        
-        for(int i = 0; i < LevelManager.getEvents().size(); i++)
-            g2.drawString(LevelManager.getEvents().get(LevelManager.getEvents().size() - i - 1), 15, 15*(i+1));
         
         overlay.draw(g2);
         

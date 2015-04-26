@@ -4,8 +4,9 @@
  * unique designs for buttons, menus, etc.
  */
 
-package engine.gui.overlays;
+package engine.gui.overlays.displayelements;
 
+import engine.gui.overlays.GraphicImage;
 import java.awt.Graphics;
 
 /**

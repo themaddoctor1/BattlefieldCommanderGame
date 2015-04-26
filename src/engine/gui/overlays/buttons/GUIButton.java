@@ -5,7 +5,7 @@ package engine.gui.overlays.buttons;
 
 import engine.gui.GUI;
 import engine.gui.UnitSelection;
-import engine.gui.overlays.DisplayElement;
+import engine.gui.overlays.displayelements.DisplayElement;
 import engine.gui.overlays.GraphicImage;
 import engine.scripts.EncapsulatedScript;
 import java.awt.Graphics;

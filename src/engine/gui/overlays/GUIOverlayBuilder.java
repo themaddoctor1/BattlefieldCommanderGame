@@ -5,6 +5,7 @@
 
 package engine.gui.overlays;
 
+import engine.gui.overlays.displayelements.BattlefieldDisplay;
 import engine.gui.GUI;
 import engine.gui.overlays.buttons.*;
 import engine.gui.overlays.icons.*;
@@ -30,6 +31,7 @@ public class GUIOverlayBuilder {
     private static void initGameOverlay(int width, int height){
         gameOverlay = new GUIOverlay();
         ButtonOverlay buttons = new ButtonOverlay();
+        DisplayOverlay display = new DisplayOverlay();
         try{
             buttons.addButton(new UnitControlButton(width - 45, height - 95, 20, 20, new OrderScript("unload all units"), new SquareIcon(new ArrowIcon(Math.toRadians(0)))));
             buttons.addButton(new UnitControlButton(width - 105, height - 95, 20, 20, new OrderScript("ascend"), new SquareIcon(new ArrowIcon(Math.toRadians(90)))));
@@ -38,11 +40,13 @@ public class GUIOverlayBuilder {
             buttons.addButton(new UnitControlButton(width - 165, height - 95, 20, 20, new OrderScript("open fire"), new SquareIcon(new LetterIcon("A"))));
             buttons.addButton(new UnitControlButton(width - 135, height - 95, 20, 20, new OrderScript("hold fire"), new SquareIcon(new LetterIcon("H"))));
             
+            display.addDisplay(new ImageFrame(new BattlefieldDisplay()));
             
         } catch(Exception e){
             e.printStackTrace();
         }
         gameOverlay.setButtonOverlay(buttons);
+        gameOverlay.setDisplayOverlay(display);
     }
     
     

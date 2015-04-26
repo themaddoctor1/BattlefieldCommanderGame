@@ -72,51 +72,56 @@ public class GameController extends Controller{
     @Override
     public void executeLeftClick(MouseEvent me){
         
-        if(getKeyboardState(4))
-            UnitSelection.shiftClick(me.getX(), me.getY());
-        else
-            UnitSelection.click(me.getX(), me.getY());
+        //These are commands that should only work when the game is running.
+        if(LevelManager.getRunStatus()){
+            if(getKeyboardState(4))
+                UnitSelection.shiftClick(me.getX(), me.getY());
+            else
+                UnitSelection.click(me.getX(), me.getY());
+        }
     }
     
     @Override
     public void executeRightClick(MouseEvent me){
         
-        
-        double dispX = me.getX() - GUI.getGUI().getCenterX();
-        double dispY = me.getY() - GUI.getGUI().getCenterY();
-        double disp = Math.sqrt(Math.pow(dispX, 2) + Math.pow(dispY, 2));
-        double theta = disp / GUI.getGUI().getPixelsPerRadian();
-        double lambda = Math.atan(dispY/dispX);
-        if(dispX < 0)
-            lambda = lambda + Math.toRadians(180);
-        lambda += GUI.getGUI().getCamera().getAxialRot() - Math.PI/2.0;
-        
-        lambda = Math.PI - lambda;
-        
-        Coordinate c = new Coordinate(
-                  (Math.tan(theta) * Math.cos(lambda)) * GUI.getGUI().getCamera().getPosition().Y() + GUI.getGUI().getCamera().getPosition().X()
-                , 0
-                , (Math.tan(theta) * Math.sin(lambda)) * GUI.getGUI().getCamera().getPosition().Y() + GUI.getGUI().getCamera().getPosition().Z()
-        );
-        
-        String target;
-        
-        try {
-            target = UnitSelection.getClickedUnits(me.getX(), me.getY()).get(0);
-        } catch(Exception e){
-            target = c.X() + " " + c.Z();
-        }
-        
-        for(int i = UnitSelection.getSelectedUnits().size() - 1; i >= 0; i--) try{
-            String nm = UnitSelection.getSelectedUnits().get(i);
-            if(GUI.getGUI().getController().getKeyboardState(6))        //The attack key (default is "A") is held down
-                GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " attack " + target, "Player");
-            else if(GUI.getGUI().getController().getKeyboardState(7))   //The attack key (default is "B") is held down
-                GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " board " + target, "Player");
-            else
-                GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " move to " + target, "Player");
-        } catch(Exception e){
-            UnitSelection.getSelectedUnits().remove(i);
+        //These are commands that should only work when the game is running.
+        if(LevelManager.getRunStatus()){
+            double dispX = me.getX() - GUI.getGUI().getCenterX();
+            double dispY = me.getY() - GUI.getGUI().getCenterY();
+            double disp = Math.sqrt(Math.pow(dispX, 2) + Math.pow(dispY, 2));
+            double theta = disp / GUI.getGUI().getPixelsPerRadian();
+            double lambda = Math.atan(dispY/dispX);
+            if(dispX < 0)
+                lambda = lambda + Math.toRadians(180);
+            lambda += GUI.getGUI().getCamera().getAxialRot() - Math.PI/2.0;
+
+            lambda = Math.PI - lambda;
+
+            Coordinate c = new Coordinate(
+                      (Math.tan(theta) * Math.cos(lambda)) * GUI.getGUI().getCamera().getPosition().Y() + GUI.getGUI().getCamera().getPosition().X()
+                    , 0
+                    , (Math.tan(theta) * Math.sin(lambda)) * GUI.getGUI().getCamera().getPosition().Y() + GUI.getGUI().getCamera().getPosition().Z()
+            );
+
+            String target;
+
+            try {
+                target = UnitSelection.getClickedUnits(me.getX(), me.getY()).get(0);
+            } catch(Exception e){
+                target = c.X() + " " + c.Z();
+            }
+
+            for(int i = UnitSelection.getSelectedUnits().size() - 1; i >= 0; i--) try{
+                String nm = UnitSelection.getSelectedUnits().get(i);
+                if(GUI.getGUI().getController().getKeyboardState(6))        //The attack key (default is "A") is held down
+                    GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " attack " + target, "Player");
+                else if(GUI.getGUI().getController().getKeyboardState(7))   //The attack key (default is "B") is held down
+                    GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " board " + target, "Player");
+                else
+                    GUI.getGUI().parseUserInput("UNIT_ORDER", nm + " move to " + target, "Player");
+            } catch(Exception e){
+                UnitSelection.getSelectedUnits().remove(i);
+            }
         }
     }
 

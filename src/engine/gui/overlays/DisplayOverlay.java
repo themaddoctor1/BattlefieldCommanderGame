@@ -6,6 +6,7 @@
 
 package engine.gui.overlays;
 
+import engine.gui.overlays.displayelements.DisplayElement;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
@@ -23,6 +24,10 @@ public class DisplayOverlay {
     public void draw(Graphics g){
         for(DisplayElement e : elements)
             e.draw(g);
+    }
+    
+    public void addDisplay(DisplayElement de){
+        elements.add(de);
     }
     
 }
