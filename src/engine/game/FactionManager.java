@@ -134,6 +134,24 @@ public class FactionManager {
             
         }
     }
+
+    public static void removeFaction(String s) {
+        factions.remove(s);
+        relationships.remove(s);
+        
+        Enumeration relats = relationships.keys();
+        
+        while(relats.hasMoreElements()){
+            Hashtable subHash = (Hashtable) relats.nextElement();
+            Enumeration enu = subHash.keys();
+            while(enu.hasMoreElements()){
+                String nm = (String) enu.nextElement();
+                if(nm.equals(s))
+                    subHash.remove(s);
+            }
+        }
+        
+    }
     
     
 }
