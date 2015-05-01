@@ -8,7 +8,7 @@ package engine.entities.units;
 
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.MovableEntity;
-import engine.entities.TerrainElement;
+import engine.entities.terrain.TerrainElement;
 import engine.entities.interfaces.*;
 import engine.entities.items.Inventory;
 import engine.entities.items.Item;

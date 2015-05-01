@@ -5,6 +5,7 @@
 
 package engine.world;
 
+import engine.entities.terrain.TerrainElement;
 import engine.entities.units.Unit;
 import engine.entities.*;
 import engine.game.FactionManager;

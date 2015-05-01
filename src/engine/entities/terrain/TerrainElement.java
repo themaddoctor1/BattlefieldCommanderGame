@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package engine.entities;
+package engine.entities.terrain;
 
+import engine.entities.Entity;
 import engine.entities.units.Unit;
 import engine.physics.Coordinate;
 import engine.world.LevelManager;
