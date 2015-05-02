@@ -17,7 +17,9 @@ public class SpawnManager {
             s.cycle(factor);
     }
     
-    public static void addSpawner(Spawner s){ spawners.add(s); }
+    public static void addSpawner(Spawner s){
+        spawners.add(s);
+    }
     public static void addSpawners(ArrayList<Spawner> sp){ spawners.addAll(sp); }
     
     public static ArrayList<Spawner> getSpawners(){ return spawners; }

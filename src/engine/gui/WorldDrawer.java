@@ -73,19 +73,7 @@ public class WorldDrawer {
                 g2.setColor(new Color(g2.getColor().getRed(),g2.getColor().getGreen(),g2.getColor().getBlue()));
                 g2.drawOval(position[0] - radius, position[1] - radius, 2 * radius, 2 * radius);
                 
-                for(String s : UnitSelection.getSelectedUnits())
-                    if(s.equals(u.getName())){
-                        g2.drawRect(position[0] - radius - 1, position[1] - radius - 1, 2 * (radius+1), 2 * (radius+1));
-                        g2.drawRect(position[0] - radius - 2, position[1] - radius - 2, 2 * (radius+2), 2 * (radius+2));
-                        drawUnitTooltip(g2, u, position[0] + radius, position[1] - radius);
-                        break;
-                    }
                 
-                //Mouse hints for Units
-                try {if(Math.sqrt(Math.pow(position[0] - GUI.getGUI().getController().getMouseX(),2) + Math.pow(position[1] - GUI.getGUI().getController().getMouseY(),2)) < radius){
-                    g2.drawRect(position[0] - radius - 1, position[1] - radius - 1, 2 * (radius+1), 2 * (radius+1));
-                    drawUnitTooltip(g2, u, GUI.getGUI().getController().getMouseX(), GUI.getGUI().getController().getMouseY());
-                }}catch(NullPointerException e){}
                 
             }
         } catch(NullPointerException npe){
@@ -180,34 +168,6 @@ public class WorldDrawer {
         
     }
     
-    public static void drawUnitTooltip(Graphics2D g2, Unit u, int x, int y){
-        String faction = FactionManager.getFactionOf(u.getName());
-        int width = Math.max(150,8*u.getName().length() + 50);
-        
-        g2.setColor(new Color(g2.getColor().getRed(), g2.getColor().getGreen(), g2.getColor().getBlue(), 64));
-        
-        g2.fillRect(x+10, y+10, width, 55);
-        
-        g2.setColor(Color.BLACK);
-        
-        if("Player".equals(faction) || FactionManager.getRelationship("Player", faction))
-            g2.drawString("Name: " + u.getName(), x + 14, y+25);
-        else
-            g2.drawString("Name: Unknown", x + 14, y+25);
-        
-        String type = u.getType();
-        g2.drawString("Unit Type: " + type, x + 14, y+40);
-        
-        if("Player".equals(faction))
-            g2.drawString("Relationship: Yours", x + 14, y+55);
-        else if(FactionManager.getRelationship("Player", faction))
-            g2.drawString("Relationship: Ally", x + 14, y+55);
-        else
-            g2.drawString("Relationship: Hostile", x + 14, y+55);
-        
-        
-        g2.drawRect(x+10, y+10, width, 55);
-    }
     
     
 }

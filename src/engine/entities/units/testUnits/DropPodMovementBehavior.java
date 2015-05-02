@@ -7,8 +7,10 @@ package engine.entities.units.testUnits;
 
 import engine.entities.interfaces.brains.UnitBrain;
 import engine.entities.interfaces.brains.behaviors.movementbehavior.MovementBehavior;
+import engine.entities.terrain.TerrainElement;
 import engine.entities.units.Unit;
 import engine.physics.*;
+import engine.world.LevelManager;
 
 /**
  *
@@ -26,7 +28,21 @@ public class DropPodMovementBehavior extends MovementBehavior {
     public void actMovement(Unit me, double factor) {
         Coordinate position = me.getPosition();
         Vector velocity = me.getVelocity();
-        if(     -velocity.getMagnitudeY() >= 0.9*Math.sqrt(Math.abs(2*(40 - 10) * (position.Y() - me.getSize())))
+        
+        double height = position.Y() - me.getSize();
+        
+        double offset = 0;
+        for(int i = 0; i < LevelManager.getLevel().getTerrain().size(); i++){
+            TerrainElement te = LevelManager.getLevel().getTerrain().get(i);
+            double diff = te.getPosition().Y() + te.getSize()[1]/2.0;
+            if(te.getPosition().Y() + te.getSize()[1]/2.0 > offset)
+                offset = diff;
+            
+        }
+        
+        height -= offset;
+        
+        if(     -velocity.getMagnitudeY() >= 0.9*Math.sqrt(Math.abs(2*(40 - 10) * (height)))
                 && !me.onGround()
                 ){
             

@@ -5,6 +5,7 @@
  */
 package engine.game.scenarios;
 
+import engine.entities.terrain.structures.DropPodLandingPad;
 import engine.entities.units.soldiers.Infantry;
 import engine.game.FactionManager;
 import engine.game.spawning.DropPodSpawner;
@@ -19,11 +20,17 @@ import engine.world.LevelManager;
  */
 public class TestScenario extends Scenario {
     
-    
     @Override
     protected void buildTerrain(Level l){
-        
+        l.getTerrain().add(new DropPodLandingPad(new Coordinate(0,0,0), "Test_Ally"));
     }
+    
+    
+    @Override
+    protected void preloadProcedure(Level l) {
+        SpawnManager.getSpawners().clear();
+    }
+    
     
     @Override
     protected void loadEntities(Level l) {
@@ -57,10 +64,11 @@ public class TestScenario extends Scenario {
 
     @Override
     protected void generateSpawners(Level l) {
-        SpawnManager.getSpawners().clear();
-        SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
-        SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
+        
+        //SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
+        //SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
     }
+
     
     
 

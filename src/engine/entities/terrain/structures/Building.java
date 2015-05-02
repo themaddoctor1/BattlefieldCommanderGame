@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package engine.entities.terrain;
+package engine.entities.terrain.structures;
 
+import engine.entities.terrain.TerrainElement;
 import engine.physics.Coordinate;
 import engine.scripts.TimeLimitedScript;
 
@@ -14,16 +15,19 @@ import engine.scripts.TimeLimitedScript;
  */
 public class Building extends TerrainElement{
     
-    private TimeLimitedScript function;
+    private final TimeLimitedScript function;
+    private String factID;
     
-    public Building(Coordinate coord, double[] dimensions, TimeLimitedScript script) {
+    public Building(Coordinate coord, double[] dimensions, String fac, TimeLimitedScript script) {
         super(coord, dimensions);
         function = script;
+        factID = fac;
     }
     
-    public void cycle(double factor){
+    public final void cycle(double factor){
         String[] params = {factor + ""};
-        function.execute(params);
+        if(function != null)
+            function.execute(params);
     }
     
 }

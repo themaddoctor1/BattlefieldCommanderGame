@@ -7,6 +7,7 @@
 package engine.gui.overlays.displayelements;
 
 import engine.gui.GUI;
+import engine.gui.UnitSelection;
 import engine.gui.WorldDrawer;
 import engine.gui.overlays.GraphicImage;
 import engine.world.LevelManager;
@@ -29,6 +30,7 @@ public class BattlefieldDisplay extends GraphicImage{
         
         g2.setFont(new Font("Segoe UI", Font.PLAIN, 12));
         WorldDrawer.drawWorld(g2, gui.getCamera());
+        UnitSelection.drawSelection(g2, GUI.getGUI().getCamera(), LevelManager.getLevel());
         g2.setColor(Color.BLACK);
         
         //Center of screen crosshair

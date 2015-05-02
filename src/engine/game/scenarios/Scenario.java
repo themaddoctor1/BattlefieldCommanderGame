@@ -19,6 +19,7 @@ public abstract class Scenario {
     
     public final void loadScenario(){
         Level level = new Level();
+        preloadProcedure(level);
         buildTerrain(level);
         addOpponents(level);
         loadEntities(level);
@@ -27,6 +28,7 @@ public abstract class Scenario {
         LevelManager.setLevel(level);
     }
     
+    protected abstract void preloadProcedure(Level l);
     protected abstract void buildTerrain(Level l);
     protected abstract void loadEntities(Level l);
     protected abstract void addOpponents(Level l);

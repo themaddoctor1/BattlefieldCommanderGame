@@ -4,6 +4,8 @@
  */
 package engine.game.spawning;
 
+import engine.entities.terrain.TerrainElement;
+
 /**
  *
  * @author Christopher
@@ -17,5 +19,9 @@ public abstract class Spawner {
 
     public abstract void cycle(double time);
     
+    public abstract void requestSpawn();
+    
     public final String factionID(){ return FACTION_ID; }
+
+    public abstract void centerOn(TerrainElement elem);
 }
