@@ -99,6 +99,7 @@ public class LevelManager {
                 thread.start();
             } else {
                 WorldThread.setRunStatus(true);
+                cycles = 0;
             }
         
     }

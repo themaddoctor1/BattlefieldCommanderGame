@@ -28,11 +28,13 @@ public class Aircraft extends AirUnit{
         velocity = new Vector(Math.sqrt(minSpeed*topSpeed),0,0);
     }
     
+    /*
     public void cycle(double factor){
         //velocity.addVectorToThis(new Vector(9.81*factor,0,Math.toRadians(90)));
         super.cycle(factor);
         //System.out.println(Math.toDegrees(velocity.getAngleXZ()));
     }
+    */
     
     public double getTurnRate() {
         return TURN_RATE;

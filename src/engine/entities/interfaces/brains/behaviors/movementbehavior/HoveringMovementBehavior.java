@@ -33,6 +33,7 @@ public class HoveringMovementBehavior extends MovementBehavior{
         double maxHorizAcc = Math.sqrt(Math.pow(helo.maxAcc(),2) - Math.pow(9.81,2));
         helo.getEngineAcceleration().multiplyMagnitude(0);
         
+        //Only works if it has a pilot.
         if(helo.hasPilot())
         if(getOwner().getDestinations().size() > 0 && getOwner().willMove()){
             Coordinate destination = null;
@@ -42,6 +43,7 @@ public class HoveringMovementBehavior extends MovementBehavior{
                 try {
                     destination = LevelManager.getLevel().getUnit(((String)(getOwner().getDestinations().get(0))).substring("[UNIT]".length())).getPosition();
                 } catch(Exception ex){
+                    //If the Unit is ordered to ascend,...
                     if(getOwner().getDestinations().get(0).toString().indexOf("[ASCEND]") == 0){
                         //Ascend
                         double dest = Math.max(10*Integer.parseInt(getOwner().getDestinations().get(0).toString().substring(8)),helo.getSize());
@@ -52,6 +54,7 @@ public class HoveringMovementBehavior extends MovementBehavior{
                             getOwner().getDestinations().remove(0);
                             actMovement(me,factor);
                         }
+                    ///Otherwise, if the Unit is supposed to descend,...
                     } else if(getOwner().getDestinations().get(0).toString().indexOf("[DESCEND]") == 0){
                         //Decend
                         int dest = Math.max(0, 10*Integer.parseInt(getOwner().getDestinations().get(0).toString().substring(9)));

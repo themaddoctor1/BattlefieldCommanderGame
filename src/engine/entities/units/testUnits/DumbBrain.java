@@ -9,7 +9,6 @@ import engine.entities.interfaces.brains.behaviors.orderprocess.TransportOrderPr
 import engine.entities.interfaces.brains.behaviors.combatbehavior.BasicCombatBehavior;
 import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.interfaces.brains.UnitBrain;
-import engine.entities.interfaces.brains.behaviors.*;
 import engine.entities.units.Unit;
 
 /**

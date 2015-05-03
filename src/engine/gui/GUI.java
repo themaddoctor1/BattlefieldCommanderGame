@@ -24,8 +24,8 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     //Code for the Text Box at the bottom
     /////////////////////////
     // The text field in which the user enters a string.
-    private TextField inputField;
-    //The GUI object
+    //private TextField inputField;
+    
     private String lastInput = "";
     //////////////////////////
     
@@ -33,7 +33,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     
     //////////////////////////
     
-    
+    //The GUI object
     private static GUI gui = new GUI(1200,900);
     
     //The controller
@@ -181,12 +181,12 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
     
     public void setPixelsPerRadian(double ppr){ PPR = ppr; }
     
-    public void setDegreesPerRadian(double dpr){
-        setPixelsPerRadian(dpr*180.0/Math.PI);
+    public void setPixelsPerDegree(double ppd){
+        setPixelsPerRadian(ppd*180.0/Math.PI);
     }
     
     public double getPixelsPerDegree(){
-        return PPR * Math.PI/180.0;
+        return PPR * 180.0 / Math.PI;
     }
     
     public double getPixelsPerRadian() { return PPR; }

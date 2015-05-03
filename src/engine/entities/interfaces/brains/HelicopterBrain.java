@@ -12,6 +12,7 @@ import engine.entities.interfaces.brains.behaviors.orderprocess.HelicopterOrderP
 import engine.entities.interfaces.brains.behaviors.combatbehavior.BasicCombatBehavior;
 import engine.entities.interfaces.brains.behaviors.awarenesprocess.SightAwarenessProcess;
 import engine.entities.interfaces.brains.behaviors.*;
+import engine.entities.interfaces.brains.behaviors.combatbehavior.LimitedAngleCombatBehavior;
 import engine.entities.units.helicopters.Helicopter;
 import engine.entities.units.Unit;
 import engine.game.FactionManager;
@@ -28,7 +29,7 @@ public class HelicopterBrain extends UnitBrain{
     public HelicopterBrain(String nm) {
         super(
                 nm, 
-                new BasicCombatBehavior(),
+                new LimitedAngleCombatBehavior(Math.toRadians(-90), Math.toRadians(20)),
                 new HoveringMovementBehavior(), 
                 new HelicopterOrderProcess(new DefaultUnitOrderProcess()),
                 new SightAwarenessProcess(Math.toRadians(180), Math.toRadians(0)));

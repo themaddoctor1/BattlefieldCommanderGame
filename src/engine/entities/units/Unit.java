@@ -122,8 +122,10 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     @Override
     public double getMaxHP() { return maxHP; }
     
+    @Override
     public Inventory getInventory(){return inv; }
     
+    @Override
     public void setInventory(Inventory i){ inv = i;}
     
     public Vector getVelocity(){ return velocity; }

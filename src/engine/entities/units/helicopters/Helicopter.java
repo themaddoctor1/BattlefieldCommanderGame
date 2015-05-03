@@ -25,9 +25,10 @@ public class Helicopter extends AirUnit{
     
     @Override
     public void cycle(double factor){
-        velocity.addVectorToThis(new Vector(engineAcc,factor));
+        Vector acceleration = new Vector(engineAcc, factor);
+        velocity.addVectorToThis(acceleration);
         
-        velocity.addVectorToThis(new Vector(9.81*factor,0,Math.toRadians(-90)));
+        //velocity.addVectorToThis(new Vector(9.81*factor,0,Math.toRadians(-90)));
         super.cycle(factor);
     }
     

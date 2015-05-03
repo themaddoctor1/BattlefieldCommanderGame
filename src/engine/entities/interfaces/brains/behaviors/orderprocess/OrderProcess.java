@@ -45,7 +45,7 @@ public abstract class OrderProcess extends BrainBehavior{
         }
         
         
-        if(!processOrder(order))
+        if(!processOrder(order) && process != null)
             process.giveOrder(order, factID);
         
     }

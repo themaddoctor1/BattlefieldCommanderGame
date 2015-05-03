@@ -5,14 +5,12 @@
  */
 package engine.game.scenarios;
 
-import engine.entities.terrain.structures.DropPodLandingPad;
-import engine.entities.units.soldiers.Infantry;
-import engine.game.FactionManager;
-import engine.game.spawning.DropPodSpawner;
-import engine.game.spawning.SpawnManager;
-import engine.physics.Coordinate;
-import engine.world.Level;
-import engine.world.LevelManager;
+import engine.entities.terrain.structures.*;
+import engine.entities.units.soldiers.*;
+import engine.game.*;
+import engine.game.spawning.*;
+import engine.physics.*;
+import engine.world.*;
 
 /**
  *
@@ -22,7 +20,7 @@ public class TestScenario extends Scenario {
     
     @Override
     protected void buildTerrain(Level l){
-        l.getTerrain().add(new DropPodLandingPad(new Coordinate(0,0,0), "Test_Ally"));
+        //l.getTerrain().add(new DropPodLandingPad(new Coordinate(0,0,0), "Test_Ally"));
     }
     
     
@@ -65,8 +63,9 @@ public class TestScenario extends Scenario {
     @Override
     protected void generateSpawners(Level l) {
         
-        //SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
-        //SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
+        SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
+        SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
+        SpawnManager.addSpawner(new PeripheralSpawner(15, "Player"));
     }
 
     
