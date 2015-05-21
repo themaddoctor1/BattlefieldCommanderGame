@@ -32,7 +32,7 @@ public class GameController extends Controller{
                 , KeyEvent.VK_CONTROL       //Hold with A to select all units
                 , KeyEvent.VK_A             //Hold to choose attack location when right-clicking
                 , KeyEvent.VK_B             //Hold to choose boarding target when right-clicking
-                , KeyEvent.VK_P        //Press to pause the game
+                , KeyEvent.VK_P             //Press to pause the game
         };
         
         setKeyCodes(keys);

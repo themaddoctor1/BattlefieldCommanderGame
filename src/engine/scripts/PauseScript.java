@@ -28,7 +28,7 @@ public class PauseScript extends EncapsulatedScript{
     protected void script(String[] params) {
         if(pause){
             LevelManager.stopSimulation();
-            GUI.getGUI().setGUIOverlay(GUIOverlayBuilder.getPauseOverlay(GUI.getGUI().getWidth(), GUI.getGUI().getHeight()));
+            GUI.getGUI().setGUIOverlay(GUIOverlayBuilder.getPauseOverlay());
             for(CentralBrain cb : AI_Manager.getBrains())
                 cb.pause();
         } else {

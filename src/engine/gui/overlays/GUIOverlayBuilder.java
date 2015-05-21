@@ -5,6 +5,7 @@
 
 package engine.gui.overlays;
 
+import engine.gui.Controller;
 import engine.gui.overlays.displayelements.BattlefieldDisplay;
 import engine.gui.GUI;
 import engine.gui.overlays.buttons.*;
@@ -53,27 +54,36 @@ public class GUIOverlayBuilder {
     ////////////////////////////////////////////////////////////////////////////
     
     
-    public static GUIOverlay getPauseOverlay(int width, int height){
+    public static GUIOverlay getPauseOverlay(){
         if(pauseOverlay == null){
-            initPauseOverlay(width,height);
-            return getPauseOverlay(width,height);
+            initPauseOverlay();
+            return getPauseOverlay();
         }
         return pauseOverlay;
     }
 
-    private static void initPauseOverlay(int width, int height){
+    private static void initPauseOverlay(){
         pauseOverlay = new GUIOverlay();
         ButtonOverlay buttons = new ButtonOverlay();
+        DisplayOverlay display = new DisplayOverlay();
+        
         try{
             
-            
             buttons.addButton(new DefaultButton(GUI.getGUI().getCenterX() - 60, GUI.getGUI().getCenterY() - 60, 150, 20, new PauseScript(false), new SquareIcon(new TextIcon("Resume Game"))));
+            
+            display.addDisplay(new ImageFrame(new TextIcon("Controls"), GUI.getGUI().getCenterX(), GUI.getGUI().getCenterY(), 18));
+            Controller c = GUI.getGUI().getController();
+            display.addDisplay(new ImageFrame(new TextIcon("Attack - " + (char) c.getKeyCodeOf(6)), GUI.getGUI().getCenterX(), GUI.getGUI().getCenterY() + 22, 14));
+            display.addDisplay(new ImageFrame(new TextIcon("Board - " + (char) c.getKeyCodeOf(7)), GUI.getGUI().getCenterX(), GUI.getGUI().getCenterY() + 40, 14));
+            display.addDisplay(new ImageFrame(new TextIcon("Pause - " + (char) c.getKeyCodeOf(8)), GUI.getGUI().getCenterX(), GUI.getGUI().getCenterY() + 58, 14));
+            
             
             
         } catch(Exception e){
             e.printStackTrace();
         }
         pauseOverlay.setButtonOverlay(buttons);
+        pauseOverlay.setDisplayOverlay(display);
     }
     
     

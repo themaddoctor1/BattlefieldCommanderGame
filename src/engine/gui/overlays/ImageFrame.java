@@ -17,6 +17,10 @@ public class ImageFrame extends DisplayElement{
     public ImageFrame(GraphicImage bi) {
         super(0, 0, 0, 0, bi);
     }
+    
+    public ImageFrame(GraphicImage bi, int x, int y, int size){
+        super(x,y,0, size,bi);
+    }
 
     @Override
     public boolean shouldAct() {
