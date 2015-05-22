@@ -11,7 +11,7 @@ import engine.entities.terrain.TerrainElement;
  * @author Christopher
  */
 public abstract class Spawner {
-    private final String FACTION_ID;
+    private String FACTION_ID;
     
     public Spawner(String id){
         FACTION_ID = id;
@@ -24,4 +24,8 @@ public abstract class Spawner {
     public final String factionID(){ return FACTION_ID; }
 
     public abstract void centerOn(TerrainElement elem);
+
+    public void setOwner(String fac) {
+        FACTION_ID = fac;
+    }
 }

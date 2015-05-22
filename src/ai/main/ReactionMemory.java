@@ -35,10 +35,11 @@ public class ReactionMemory extends Memory{
     * Uses the String[] param input to find the polarity of the memory
     */
     private double calculatePolarValue(String param){
-        String parameter = param;//param.substring(param.indexOf("^") + 1);
-        String fact = FactionManager.getFactionOf(parameter.substring(0, parameter.indexOf(" killed ")));
         
         try {
+            String parameter = param;//param.substring(param.indexOf("^") + 1);
+            String fact = FactionManager.getFactionOf(parameter.substring(0, parameter.indexOf(" killed ")));
+            
             String actor = param.substring(0, parameter.indexOf(" killed "));
             String victim = param.substring(parameter.indexOf(" killed ") + 8);
             

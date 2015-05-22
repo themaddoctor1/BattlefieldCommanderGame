@@ -34,6 +34,7 @@ public class LevelManager {
     
     public static void addEvent(String event){
         events.add(event);
+        
         for(CentralBrain cb : AI_Manager.getBrains()){
             cb.addReactionMemory(event);
         }

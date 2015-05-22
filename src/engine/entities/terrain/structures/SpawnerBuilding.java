@@ -27,4 +27,12 @@ public class SpawnerBuilding extends Building{
         spawner = spawn;
     }
 
+    @Override
+    public void changeOwnerTo(String fac) {
+        super.changeOwnerTo(fac); //To change body of generated methods, choose Tools | Templates.
+        spawner.setOwner(fac);
+    }
+    
+    
+
 }

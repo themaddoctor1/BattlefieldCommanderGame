@@ -127,7 +127,10 @@ public class CentralBrain extends Thread{
         ratings = new ArrayList<>();
         
         //Priming the particular response.
-        ratings.add(new GeneralizedActionMemory("Infantry attack Infantry"));
+        //ratings.add(new GeneralizedActionMemory("Infantry attack Infantry"));
+        for(int i = 0; i < LevelManager.getLevel().getUnits().size(); i++)
+            for(int j = i+1; j < LevelManager.getLevel().getUnits().size(); j++)
+                ratings.add(new GeneralizedActionMemory(LevelManager.getLevel().getUnits().get(i).getType() + " attack " + LevelManager.getLevel().getUnits().get(j).getType()));
         
         //Sorts through every previous action.
         for(int i = 0; i < pastActions.size(); i++){
@@ -135,7 +138,7 @@ public class CentralBrain extends Thread{
             boolean added = false;
             for(GeneralizedActionMemory gam : ratings)
                 if(!added)
-                    added = (added || gam.addActionMemoryReaction(pastActions.get(i)));
+                    added |= (gam.addActionMemoryReaction(pastActions.get(i)));
             
             //If the action is new, add a Generalized Memory for it.
             if(!added)

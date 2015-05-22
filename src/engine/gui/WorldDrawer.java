@@ -9,6 +9,7 @@ package engine.gui;
 import engine.entities.terrain.TerrainElement;
 import engine.entities.units.Unit;
 import engine.entities.*;
+import engine.entities.terrain.structures.Building;
 import engine.game.FactionManager;
 import engine.world.*;
 import engine.gui.*;
@@ -32,6 +33,7 @@ public class WorldDrawer {
         
         //c.getDirection().addVectorToThis(new Vector(0.001, 0, c.getY() -Math.toRadians(90)));
         
+        //Draws the horizon
         g2.setColor(new Color(0,0,0));
         if(Math.sin(c.getY()) != 0){
             int[] straightDown = c.getPlanarCoordinate(new Coordinate(c.getPosition().X(), c.getPosition().Y() - 1, c.getPosition().Z()));
@@ -46,6 +48,35 @@ public class WorldDrawer {
         } else {
             g2.drawLine(0, GUI.getGUI().getCenterY(), GUI.getGUI().getWidth(), GUI.getGUI().getCenterY());
         }
+        
+        
+        drawUnits(g, c, l);
+        drawTerrain(g, c, l);
+        
+        //Draws every projectile
+        g2.setColor(Color.BLACK);
+        try{
+            for(int i = 0; i < l.getProjectiles().size(); i++){
+                Projectile p = l.getProjectiles().get(i);
+                int[] position = c.getPlanarCoordinate(p.getPosition());
+                int radius = (int)(GUI.getGUI().getPixelsPerRadian() * Math.asin(0.2/Coordinate.relativeDistance(c.getPosition(), p.getPosition()))) + 1;
+                
+                g2.fillOval(position[0] - radius, position[1] - radius, 2 * radius, 2 * radius);
+                
+            }
+
+        } catch(NullPointerException npe){
+            
+        }
+        
+    }
+    
+    
+    
+    public static void drawUnits(Graphics g, Camera c, Level l){
+        
+        Graphics2D g2 = (Graphics2D) g;
+        
         
         //Draws all of the Units.
         try{
@@ -79,7 +110,13 @@ public class WorldDrawer {
         } catch(NullPointerException npe){
             
         }
+    }
+    
+    
+    
+    public static void drawTerrain(Graphics g, Camera c, Level l){
         
+        Graphics2D g2 = (Graphics2D) g;
         
         //Draws every TerrainElement
         try{
@@ -91,6 +128,28 @@ public class WorldDrawer {
                     coordinates.add(c.getPlanarCoordinate(coord));
                 }
                 
+                Color def = g2.getColor();
+                Color outline = g2.getColor();
+                
+                if(t instanceof Building){
+                    
+                    String factID = ((Building) t).getFactionID();
+                    
+                    if(factID != null){
+                        if("Player".equals(factID)){
+                            //Player's Building
+                            outline = (new Color(0,0,255));
+                        } else {
+                            if(FactionManager.getRelationship("Player", factID))
+                                outline = (new Color(0,255, 0));
+                            else{
+                                outline = (new Color(255,0,0));
+                            }
+                        }
+                    }
+                }
+                    
+                
                 Polygon p = new Polygon();
                 
                 //g2.setColor(new Color(255,0,0,128));
@@ -100,6 +159,11 @@ public class WorldDrawer {
                 p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
                 p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
                 g2.fillPolygon(p);
+                if(!def.equals(outline)){
+                    g2.setColor(outline);
+                    g2.drawPolygon(p);
+                    g2.setColor(def);
+                }
                 p = new Polygon();
                 
                 p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
@@ -107,6 +171,11 @@ public class WorldDrawer {
                 p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
                 p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
                 g2.fillPolygon(p);
+                if(!def.equals(outline)){
+                    g2.setColor(outline);
+                    g2.drawPolygon(p);
+                    g2.setColor(def);
+                }
                 p = new Polygon();
                 
                 
@@ -118,6 +187,11 @@ public class WorldDrawer {
                 p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
                 p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
                 g2.fillPolygon(p);
+                if(!def.equals(outline)){
+                    g2.setColor(outline);
+                    g2.drawPolygon(p);
+                    g2.setColor(def);
+                }
                 p = new Polygon();
                 
                 p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
@@ -125,6 +199,11 @@ public class WorldDrawer {
                 p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
                 p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
                 g2.fillPolygon(p);
+                if(!def.equals(outline)){
+                    g2.setColor(outline);
+                    g2.drawPolygon(p);
+                    g2.setColor(def);
+                }
                 p = new Polygon();
                 
                 
@@ -136,12 +215,22 @@ public class WorldDrawer {
                 p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
                 p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
                 g2.fillPolygon(p);
+                if(!def.equals(outline)){
+                    g2.setColor(outline);
+                    g2.drawPolygon(p);
+                    g2.setColor(def);
+                }
                 p = new Polygon();
 
                 p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
                 p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
                 p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
                 p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
+                if(!def.equals(outline)){
+                    g2.setColor(outline);
+                    g2.drawPolygon(p);
+                    g2.setColor(def);
+                }
                 g2.fillPolygon(p);
                 
                 
@@ -150,24 +239,6 @@ public class WorldDrawer {
         } catch(NullPointerException npe){
             
         }
-        
-        g2.setColor(Color.BLACK);
-        try{
-            for(int i = 0; i < l.getProjectiles().size(); i++){
-                Projectile p = l.getProjectiles().get(i);
-                int[] position = c.getPlanarCoordinate(p.getPosition());
-                int radius = (int)(GUI.getGUI().getPixelsPerRadian() * Math.asin(0.2/Coordinate.relativeDistance(c.getPosition(), p.getPosition()))) + 1;
-                
-                g2.fillOval(position[0] - radius, position[1] - radius, 2 * radius, 2 * radius);
-                
-            }
-
-        } catch(NullPointerException npe){
-            
-        }
-        
     }
-    
-    
     
 }

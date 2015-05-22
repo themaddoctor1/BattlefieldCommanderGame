@@ -20,7 +20,10 @@ import java.awt.event.MouseEvent;
  * @author Christopher Hittner
  */
 public class GameController extends Controller{
-
+    
+    private long lastTime;
+    
+    
     public GameController(String nm) {
         super(nm, new int[0]);
         int[] keys = {
@@ -38,12 +41,21 @@ public class GameController extends Controller{
         setKeyCodes(keys);
         
         setKeyboardState(keys[8], true);
+        
+        lastTime = System.nanoTime();
     }
-
+    
     @Override
     public void execute(){
         
-        double cameraSpeed = 0.2;
+        double factor = (System.nanoTime() - lastTime) / Math.pow(10, 9);
+        
+        if(factor > 0.1)
+            factor = 0;
+        
+        lastTime = System.nanoTime();
+        
+        double cameraSpeed = 40 * factor;
         
         if(getKeyboardState(0))
             GUI.getGUI().getCamera().getPosition().addVector(new Vector(cameraSpeed,Math.toRadians(0),0));

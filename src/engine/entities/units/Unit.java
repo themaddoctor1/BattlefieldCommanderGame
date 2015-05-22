@@ -60,6 +60,9 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
         if(getPosition().Y() < getSize()){
             fallDamage();
             
+            if(hp <= 0)
+                return;
+            
             getVelocity().addVectorToThis(new Vector(getVelocity().getMagnitudeY(),0,-Math.toRadians(90)));
             
             getPosition().addVector(new Vector(getSize() - getPosition().Y(),0,Math.toRadians(90)));
@@ -94,11 +97,12 @@ public abstract class Unit extends MovableEntity implements Health, HasInventory
     public final void harm(float amt) {hp = Math.max(hp - amt, 0);}
     
     public void fallDamage(){
-        if(velocity.getMagnitude() > 5)
+        if(velocity.getMagnitude() > 5){
             harm((float)(Math.pow(velocity.getMagnitude(),2)*Math.cbrt(maxHP) * Math.pow(Math.sin(velocity.getAngleY()) * 0.9,2)/2.0 ));
-        if(hp <= 0){
-            killSelf();
-            LevelManager.addEvent(getName() + " died from fall damage.");
+            if(hp <= 0){
+                killSelf();
+                LevelManager.addEvent(getName() + " died from fall damage.");
+            }
         }
     }
     

@@ -18,11 +18,6 @@ import engine.world.*;
  */
 public class TestScenario extends Scenario {
     
-    @Override
-    protected void buildTerrain(Level l){
-        //l.getTerrain().add(new DropPodLandingPad(new Coordinate(0,0,0), "Test_Ally"));
-    }
-    
     
     @Override
     protected void preloadProcedure(Level l) {
@@ -31,11 +26,20 @@ public class TestScenario extends Scenario {
     
     
     @Override
+    protected void buildTerrain(Level l){
+        l.getTerrain().add(new DropPodLandingPad(new Coordinate(15,0,15), "Test_Ally"));
+        l.getTerrain().add(new DropPodLandingPad(new Coordinate(15,0,-15), "Test_Ally"));
+        l.getTerrain().add(new DropPodLandingPad(new Coordinate(-15,0,15), "Test_Enemy"));
+        l.getTerrain().add(new DropPodLandingPad(new Coordinate(-15,0,-15), "Test_Enemy"));
+    }
+    
+    
+    @Override
     protected void loadEntities(Level l) {
-        l.getUnits().add(new Infantry(new Coordinate(20,0,0),"Alice"));
-        l.getUnits().add(new Infantry(new Coordinate(0,0,20),"Bob"));
-        l.getUnits().add(new Infantry(new Coordinate(-20,0,0),"Chris"));
-        l.getUnits().add(new Infantry(new Coordinate(0,0,-20),"Dave"));
+        //l.getUnits().add(new Infantry(new Coordinate(20,0,0),"Alice"));
+        //l.getUnits().add(new Infantry(new Coordinate(0,0,20),"Bob"));
+        //l.getUnits().add(new Infantry(new Coordinate(-20,0,0),"Chris"));
+        //l.getUnits().add(new Infantry(new Coordinate(0,0,-20),"Dave"));
             
             
         for(int i = 0; i < l.getUnits().size(); i++)
@@ -63,9 +67,12 @@ public class TestScenario extends Scenario {
     @Override
     protected void generateSpawners(Level l) {
         
-        SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
-        SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
-        SpawnManager.addSpawner(new PeripheralSpawner(15, "Player"));
+        //SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Enemy"));
+        //SpawnManager.addSpawner(new DropPodSpawner(0, 0, 40, 5,"Test_Ally"));
+        //SpawnManager.addSpawner(new PeripheralSpawner(15, "Player"));
+        
+        SpawnManager.addSpawner(new PeripheralSpawner(60, "Test_Ally"));
+        SpawnManager.addSpawner(new PeripheralSpawner(60, "Test_Enemy"));
     }
 
     

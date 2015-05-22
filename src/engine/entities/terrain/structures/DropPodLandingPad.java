@@ -18,7 +18,7 @@ import engine.scripts.TimeLimitedScript;
 public class DropPodLandingPad extends SpawnerBuilding{
 
     public DropPodLandingPad(Coordinate coord, String fac) {
-        super(new Coordinate(coord.X(), .5, coord.Z()), defaultSize(), fac, null, new DropPodSpawner(0,0,0,5, fac));
+        super(new Coordinate(coord.X(), .5, coord.Z()), defaultSize(), fac, null, new DropPodSpawner(0,0,0,10, fac));
     }
     
     private static double[] defaultSize(){
