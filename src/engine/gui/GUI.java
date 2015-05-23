@@ -245,7 +245,7 @@ public class GUI extends Applet implements KeyListener, MouseListener, MouseMoti
         
         lastInput = input.toLowerCase();
         
-        if(true)
+        if(false)
             System.out.println("[" + factID + "] " + input);
         
         /*

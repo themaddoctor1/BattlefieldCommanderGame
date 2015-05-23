@@ -5,6 +5,7 @@
  */
 package engine.game.scenarios;
 
+import engine.entities.terrain.TerrainElement;
 import engine.entities.terrain.structures.*;
 import engine.entities.units.soldiers.*;
 import engine.game.*;
@@ -31,6 +32,13 @@ public class TestScenario extends Scenario {
         l.getTerrain().add(new DropPodLandingPad(new Coordinate(15,0,-15), "Test_Ally"));
         l.getTerrain().add(new DropPodLandingPad(new Coordinate(-15,0,15), "Test_Enemy"));
         l.getTerrain().add(new DropPodLandingPad(new Coordinate(-15,0,-15), "Test_Enemy"));
+        
+        
+        double[] size = {5, 20, 150};
+        //A frickin' wall
+        l.getTerrain().add(new TerrainElement(new Coordinate(0,10,0), size));
+        
+        
     }
     
     

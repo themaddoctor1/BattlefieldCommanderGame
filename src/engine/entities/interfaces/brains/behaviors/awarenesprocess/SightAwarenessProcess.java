@@ -6,10 +6,16 @@
 
 package engine.entities.interfaces.brains.behaviors.awarenesprocess;
 
+import engine.entities.terrain.TerrainElement;
 import engine.entities.units.Unit;
+import engine.game.FactionManager;
+import engine.gui.Camera;
+import engine.gui.WorldDrawer;
 import engine.physics.Coordinate;
 import engine.physics.Vector;
 import engine.world.LevelManager;
+import java.awt.Point;
+import java.awt.Polygon;
 import java.util.ArrayList;
 
 /**
@@ -49,6 +55,42 @@ public class SightAwarenessProcess extends AwarenessProcess {
                     screenSize >= VISIBLE_SIZE)
                 visible.add(units.get(i));
         }
+        
+        
+        //Remove the ones that are hidden behind something.
+        
+        for(int i = visible.size() - 1; i >= 0; i--){
+            Unit u = visible.get(i);
+            
+            ArrayList<TerrainElement> terrain = LevelManager.getLevel().getTerrain();
+            
+            for(int j = 0; j < terrain.size(); j++){
+                
+                TerrainElement te = terrain.get(j);
+                Camera c = new Camera(me.getPosition(), new Vector(me.getPosition(), te.getPosition()).getAngleXZ(), new Vector(me.getPosition(), te.getPosition()).getAngleY());
+                ArrayList<Polygon> sides = WorldDrawer.buildTerrainPolygons(te, c);
+                
+                int[] position = c.getPlanarCoordinate(te.getPosition());
+                
+                Point point = new Point(position[0], position[1]);
+                
+                boolean removed = false;
+                
+                for(Polygon side : sides)
+                    if(side.contains(point)){
+                        visible.remove(u);
+                        removed = true;
+                        break;
+                    }
+                
+                if(removed)
+                    break;
+                
+            }
+            
+        }
+        
+        System.out.println();
         
         return visible;
     }

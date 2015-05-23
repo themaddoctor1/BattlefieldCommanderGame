@@ -96,6 +96,17 @@ public class Level {
                 }
 
             }
+            
+            for(int j = 0; j < projectiles.size(); j++){
+                Projectile p = projectiles.get(j);
+
+                if(te.collidingWith(p)){
+                    p.killSelf();
+                    j--;
+
+                }
+
+            }
         }
     }
     

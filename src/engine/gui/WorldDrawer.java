@@ -122,11 +122,7 @@ public class WorldDrawer {
         try{
             g2.setColor(new Color(128,128,128,128));
             for(TerrainElement t : l.getTerrain()){
-                ArrayList<int[]> coordinates = new ArrayList<>();
-                for(int i = 0; i < 8; i++){
-                    Coordinate coord = new Coordinate(t.getPosition().X() + (-0.5 + i%2)*(t.getSize()[0]),t.getPosition().Y() + (-0.5 + (i/2)%2)*(t.getSize()[1]),t.getPosition().Z() + (-0.5 + (i/4)%2)*(t.getSize()[2]));
-                    coordinates.add(c.getPlanarCoordinate(coord));
-                }
+                
                 
                 Color def = g2.getColor();
                 Color outline = g2.getColor();
@@ -149,96 +145,88 @@ public class WorldDrawer {
                     }
                 }
                     
-                
-                Polygon p = new Polygon();
-                
-                //g2.setColor(new Color(255,0,0,128));
-                
-                p.addPoint(coordinates.get(0)[0], coordinates.get(0)[1]);
-                p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
-                p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
-                p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
-                g2.fillPolygon(p);
-                if(!def.equals(outline)){
-                    g2.setColor(outline);
-                    g2.drawPolygon(p);
-                    g2.setColor(def);
+                for(Polygon p : buildTerrainPolygons(t, c)){
+                    g2.fillPolygon(p);
+                    if(!def.equals(outline)){
+                        g2.setColor(outline);
+                        g2.drawPolygon(p);
+                        g2.setColor(def);
+                    }
                 }
-                p = new Polygon();
-                
-                p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
-                p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
-                p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
-                p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
-                g2.fillPolygon(p);
-                if(!def.equals(outline)){
-                    g2.setColor(outline);
-                    g2.drawPolygon(p);
-                    g2.setColor(def);
-                }
-                p = new Polygon();
-                
-                
-                
-                //g2.setColor(new Color(0,255,0,128));
-                
-                p.addPoint(coordinates.get(0)[0], coordinates.get(0)[1]);
-                p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
-                p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
-                p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
-                g2.fillPolygon(p);
-                if(!def.equals(outline)){
-                    g2.setColor(outline);
-                    g2.drawPolygon(p);
-                    g2.setColor(def);
-                }
-                p = new Polygon();
-                
-                p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
-                p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
-                p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
-                p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
-                g2.fillPolygon(p);
-                if(!def.equals(outline)){
-                    g2.setColor(outline);
-                    g2.drawPolygon(p);
-                    g2.setColor(def);
-                }
-                p = new Polygon();
-                
-                
-                
-                //g2.setColor(new Color(0,0,255,128));
-                
-                p.addPoint(coordinates.get(0)[0], coordinates.get(0)[1]);
-                p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
-                p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
-                p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
-                g2.fillPolygon(p);
-                if(!def.equals(outline)){
-                    g2.setColor(outline);
-                    g2.drawPolygon(p);
-                    g2.setColor(def);
-                }
-                p = new Polygon();
-
-                p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
-                p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
-                p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
-                p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
-                if(!def.equals(outline)){
-                    g2.setColor(outline);
-                    g2.drawPolygon(p);
-                    g2.setColor(def);
-                }
-                g2.fillPolygon(p);
-                
                 
             }
 
         } catch(NullPointerException npe){
             
         }
+    }
+    
+    public static ArrayList<Polygon> buildTerrainPolygons(TerrainElement t, Camera c){
+        
+        ArrayList<Polygon> result = new ArrayList<>();
+        
+        ArrayList<int[]> coordinates = new ArrayList<>();
+            for(int i = 0; i < 8; i++){
+                Coordinate coord = new Coordinate(t.getPosition().X() + (-0.5 + i%2)*(t.getSize()[0]),t.getPosition().Y() + (-0.5 + (i/2)%2)*(t.getSize()[1]),t.getPosition().Z() + (-0.5 + (i/4)%2)*(t.getSize()[2]));
+                coordinates.add(c.getPlanarCoordinate(coord));
+            }
+
+        Polygon p = new Polygon();
+
+        //g2.setColor(new Color(255,0,0,128));
+
+        p.addPoint(coordinates.get(0)[0], coordinates.get(0)[1]);
+        p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
+        p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
+        p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
+        result.add(p);
+        p = new Polygon();
+
+        p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
+        p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
+        p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
+        p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
+        result.add(p);
+        p = new Polygon();
+
+
+
+        //g2.setColor(new Color(0,255,0,128));
+
+        p.addPoint(coordinates.get(0)[0], coordinates.get(0)[1]);
+        p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
+        p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
+        p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
+        result.add(p);
+        p = new Polygon();
+
+        p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
+        p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
+        p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
+        p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
+        result.add(p);
+        p = new Polygon();
+
+
+
+        //g2.setColor(new Color(0,0,255,128));
+
+        p.addPoint(coordinates.get(0)[0], coordinates.get(0)[1]);
+        p.addPoint(coordinates.get(2)[0], coordinates.get(2)[1]);
+        p.addPoint(coordinates.get(6)[0], coordinates.get(6)[1]);
+        p.addPoint(coordinates.get(4)[0], coordinates.get(4)[1]);
+        result.add(p);
+        p = new Polygon();
+
+        p.addPoint(coordinates.get(1)[0], coordinates.get(1)[1]);
+        p.addPoint(coordinates.get(3)[0], coordinates.get(3)[1]);
+        p.addPoint(coordinates.get(7)[0], coordinates.get(7)[1]);
+        p.addPoint(coordinates.get(5)[0], coordinates.get(5)[1]);
+        result.add(p);
+        
+        return result;
+
+                
     }
     
 }

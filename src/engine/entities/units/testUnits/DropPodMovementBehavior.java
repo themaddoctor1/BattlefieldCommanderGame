@@ -35,7 +35,9 @@ public class DropPodMovementBehavior extends MovementBehavior {
         for(int i = 0; i < LevelManager.getLevel().getTerrain().size(); i++){
             TerrainElement te = LevelManager.getLevel().getTerrain().get(i);
             double diff = te.getPosition().Y() + te.getSize()[1]/2.0;
-            if(te.getPosition().Y() + te.getSize()[1]/2.0 > offset)
+            if(te.getPosition().Y() + te.getSize()[1]/2.0 > offset
+                    && (Math.max(te.getPosition().X() - te.getSize()[0]/2, Math.min(position.X(), te.getPosition().X() + te.getSize()[0]/2)) == position.X())
+                    && (Math.max(te.getPosition().Z() - te.getSize()[2]/2, Math.min(position.Z(), te.getPosition().Z() + te.getSize()[2]/2)) == position.Z()))
                 offset = diff;
             
         }

@@ -7,6 +7,7 @@
 package engine.entities.terrain;
 
 import engine.entities.Entity;
+import engine.entities.Projectile;
 import engine.entities.units.Unit;
 import engine.physics.Coordinate;
 import engine.world.LevelManager;
@@ -33,6 +34,9 @@ public class TerrainElement extends Entity{
     public boolean collidingWith(Unit u) {
         return ((Math.abs(u.getPosition().X() - getPosition().X()) < u.getSize() + (size[0]/2.0)) && (Math.abs(u.getPosition().Y() - getPosition().Y()) < u.getSize() + (size[1]/2.0)) && (Math.abs(u.getPosition().Z() - getPosition().Z()) < u.getSize() + (size[2]/2.0)));
     }
-
+    
+    public boolean collidingWith(Projectile p) {
+        return ((Math.abs(p.getPosition().X() - getPosition().X()) < (size[0]/2.0)) && (Math.abs(p.getPosition().Y() - getPosition().Y()) < (size[1]/2.0)) && (Math.abs(p.getPosition().Z() - getPosition().Z()) < (size[2]/2.0)));
+    }
 
 }

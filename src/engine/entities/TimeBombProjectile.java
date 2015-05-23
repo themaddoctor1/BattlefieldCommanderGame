@@ -42,7 +42,7 @@ public class TimeBombProjectile extends Projectile {
     }
     
     @Override
-    protected void killSelf(){
+    public void killSelf(){
         if(time < FUSE)
             return;
         super.killSelf();

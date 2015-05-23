@@ -39,7 +39,7 @@ public class SoldierBrain extends UnitBrain{
         if(destinations.isEmpty())
             return;
         else if(me.onGround()) actMovement(me,factor);
-        if(attacking) me.getVelocity().multiplyMagnitude(0.2);
+        if(attacking) me.getVelocity().multiplyMagnitude(0.4);
         actAwareness(me, factor);
         
     }
