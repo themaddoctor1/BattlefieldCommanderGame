@@ -120,7 +120,7 @@ public class WorldDrawer {
         
         //Draws every TerrainElement
         try{
-            g2.setColor(new Color(128,128,128,128));
+            g2.setColor(new Color(128,128,128,64));
             for(TerrainElement t : l.getTerrain()){
                 
                 
@@ -131,27 +131,27 @@ public class WorldDrawer {
                     
                     String factID = ((Building) t).getFactionID();
                     
+                    int buildingOpacity = 64;
+                    
                     if(factID != null){
                         if("Player".equals(factID)){
                             //Player's Building
-                            outline = (new Color(0,0,255));
+                            outline = (new Color(0,0,255, buildingOpacity));
                         } else {
                             if(FactionManager.getRelationship("Player", factID))
-                                outline = (new Color(0,255, 0));
+                                outline = (new Color(0,255, 0, buildingOpacity));
                             else{
-                                outline = (new Color(255,0,0));
+                                outline = (new Color(255,0,0, buildingOpacity));
                             }
                         }
                     }
                 }
                     
-                for(Polygon p : buildTerrainPolygons(t, c)){
-                    g2.fillPolygon(p);
-                    if(!def.equals(outline)){
-                        g2.setColor(outline);
-                        g2.drawPolygon(p);
-                        g2.setColor(def);
-                    }
+                for(CurvedPolygon p : buildTerrainPolygons(t)){
+                    g2.setColor(outline);
+                    p.fillPolygon(g, c);
+                    g2.setColor(def);
+                    p.drawPolygon(g2, c);
                 }
                 
             }
@@ -159,6 +159,76 @@ public class WorldDrawer {
         } catch(NullPointerException npe){
             
         }
+    }
+    
+    public static ArrayList<CurvedPolygon> buildTerrainPolygons(TerrainElement t){
+        
+        ArrayList<CurvedPolygon> result = new ArrayList<>();
+        
+        ArrayList<Coordinate> coordinates = new ArrayList<>();
+            for(int i = 0; i < 8; i++){
+                coordinates.add(new Coordinate(t.getPosition().X() + (-0.5 + i%2)*(t.getSize()[0]),t.getPosition().Y() + (-0.5 + (i/2)%2)*(t.getSize()[1]),t.getPosition().Z() + (-0.5 + (i/4)%2)*(t.getSize()[2])));
+            }
+        
+        double div = 5;
+        //g2.setColor(new Color(255,0,0,128));
+        Coordinate[] a = {coordinates.get(0)
+                        , coordinates.get(1)
+                        , coordinates.get(3)
+                        , coordinates.get(2)};
+        
+        
+        result.add(new CurvedPolygon(a, div));
+        
+        
+        Coordinate[] b = {coordinates.get(4)
+                        , coordinates.get(5)
+                        , coordinates.get(7)
+                        , coordinates.get(6)};
+        
+        
+        result.add(new CurvedPolygon(b, div));
+        
+        //g2.setColor(new Color(0,255,0,128));
+        
+        Coordinate[] d = {coordinates.get(0)
+                        , coordinates.get(1)
+                        , coordinates.get(5)
+                        , coordinates.get(4)};
+        
+        
+        result.add(new CurvedPolygon(d, div));
+        
+        
+        Coordinate[] e = {coordinates.get(2)
+                        , coordinates.get(3)
+                        , coordinates.get(7)
+                        , coordinates.get(6)};
+        
+        
+        result.add(new CurvedPolygon(e, div));
+        
+        //g2.setColor(new Color(0,0,255,128));
+        
+        Coordinate[] f = {coordinates.get(0)
+                        , coordinates.get(2)
+                        , coordinates.get(6)
+                        , coordinates.get(4)};
+        
+        
+        result.add(new CurvedPolygon(f, div));
+        
+        
+        Coordinate[] g = {coordinates.get(1)
+                        , coordinates.get(3)
+                        , coordinates.get(7)
+                        , coordinates.get(5)};
+        
+        
+        result.add(new CurvedPolygon(g, div));
+        return result;
+
+                
     }
     
     public static ArrayList<Polygon> buildTerrainPolygons(TerrainElement t, Camera c){

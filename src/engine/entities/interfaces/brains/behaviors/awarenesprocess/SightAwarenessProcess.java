@@ -89,9 +89,6 @@ public class SightAwarenessProcess extends AwarenessProcess {
             }
             
         }
-        
-        System.out.println();
-        
         return visible;
     }
 
